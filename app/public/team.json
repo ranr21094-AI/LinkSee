@@ -1,0 +1,64 @@
+{
+  "teamName": "LinkSee",
+  "eventName": "灣區AI未來青年創造營",
+  "trackTitle": "创意引擎",
+  "headline": "AI想象力即“超能力”",
+  "projectLine": "用AI视频讲述澳门故事",
+  "members": [
+    {
+      "id": "wu-yunxi",
+      "name": "吳芸曦",
+      "role": "队长",
+      "age": "21",
+      "gender": "女",
+      "school": "中国人民大学",
+      "major": "政治学",
+      "tagline": "LinkSee必胜",
+      "isCaptain": true
+    },
+    {
+      "id": "lin-xuyao",
+      "name": "林叙遥",
+      "role": "AI开发",
+      "age": "22",
+      "gender": "男",
+      "school": "澳门大学",
+      "major": "计算机科学",
+      "tagline": "让算法成为讲故事的另一种镜头。",
+      "isCaptain": false
+    },
+    {
+      "id": "tang-zhiqing",
+      "name": "唐芷晴",
+      "role": "导演 / 策划",
+      "age": "20",
+      "gender": "女",
+      "school": "澳门科技大学",
+      "major": "传播学",
+      "tagline": "把城市记忆剪成看得见的情绪。",
+      "isCaptain": false
+    },
+    {
+      "id": "liang-silan",
+      "name": "梁思岚",
+      "role": "视觉设计",
+      "age": "21",
+      "gender": "女",
+      "school": "中山大学",
+      "major": "数字媒体艺术",
+      "tagline": "用视觉语言连接澳门的过去与未来。",
+      "isCaptain": false
+    },
+    {
+      "id": "he-zixuan",
+      "name": "何子轩",
+      "role": "技术实现",
+      "age": "22",
+      "gender": "男",
+      "school": "华南理工大学",
+      "major": "软件工程",
+      "tagline": "把每一次想象变成稳定可交付的作品。",
+      "isCaptain": false
+    }
+  ]
+}
