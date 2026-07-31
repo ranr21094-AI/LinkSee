@@ -27,6 +27,16 @@ const memberFields = [
 ];
 
 async function loadTeam() {
+  const usesLocalApi = ["localhost", "127.0.0.1"].includes(
+    window.location.hostname,
+  );
+
+  if (!usesLocalApi) {
+    const response = await fetch("/team.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("团队资料加载失败");
+    return response.json();
+  }
+
   try {
     const response = await fetch("/api/team", { cache: "no-store" });
     if (!response.ok) throw new Error("API unavailable");
