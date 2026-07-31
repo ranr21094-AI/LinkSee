@@ -4,15 +4,17 @@
 
 - Source visual: `C:\Users\10127\.codex\generated_images\019fb342-bc4f-7b81-bd34-82b6e5bf015c\call_xEbOPSW1aZgTguu065sGtT9w.png`
 - Source size: 1486 × 1058 px.
-- Latest map reference: `C:\Users\10127\AppData\Local\Temp\codex-clipboard-9fe4d90d-68b7-4362-b651-bc73b706cb9e.png` (643 × 775 px). The user-directed target is to replace the visible flat lower crop with a longer map texture that reaches the nearest portrait before fading.
-- Latest user direction supersedes the source visual in four areas: remove `05 / MEMBERS`, use transient translucent profile cards beside members, move the hero copy upward with the hover hint below the project underline, and extend the map texture downward into the portrait edge.
-- Final desktop implementation: `qa/implementation-map-extend-v5.png`
-- Desktop capture: public home with no profile open, 1440 × 1000 CSS viewport, DPR 1, 1440 × 1000 px.
-- Full-view targeted comparison: `qa/comparison-map-extend-v5.png`; the right-side implementation crop uses the same 643 × 775 px canvas as the user reference.
-- Focused map comparison: `qa/comparison-map-focus-v5.png`; both map regions are normalized to 420 × 500 px for direct lower-edge inspection.
-- Desktop state: public home, captain selected, 1280 × 720 CSS viewport, DPR 1.5; full-page capture is 1264 × 962 px after scrollbar exclusion.
-- Final mobile implementation: `qa/implementation-mobile-v4.png`
-- Mobile state: public home, captain selected, 390 × 844 CSS viewport; full-page capture is 374 × 1009 px after scrollbar exclusion.
+- Latest map reference: `C:\Users\10127\AppData\Local\Temp\codex-clipboard-9fe4d90d-68b7-4362-b651-bc73b706cb9e.png` (643 × 775 px). The user-directed target now places a larger map behind the event title and red underline, with its lower edge fading into the nearest portrait.
+- Latest user direction supersedes the source visual in four areas: remove `05 / MEMBERS`, use transient translucent profile cards beside members, move the hero copy upward with the hover hint below the project underline, and integrate the map into the event-title background layer.
+- Final desktop implementation: `qa/implementation-map-layer-v6.png`
+- Desktop capture: public home with no profile open, 1440 × 1000 CSS viewport, DPR 1; full-page screenshot is 1424 × 1076 px after scrollbar exclusion.
+- Full-view targeted comparison: `qa/comparison-map-layer-v6.png`; the reference and the right-side implementation crop are normalized to 643 × 775 px.
+- Focused map comparison: `qa/comparison-map-layer-focus-v6.png`; both title/map regions are normalized to 420 × 500 px for direct layer, scale, and fade inspection.
+- Tablet evidence: `qa/implementation-tablet-map-layer-v6.png`, 800 × 1000 CSS viewport, DPR 1; full-page screenshot is 784 × 1254 px.
+- Mobile evidence: `qa/implementation-mobile-map-layer-v6.png`, 390 × 844 CSS viewport, DPR 1; full-page screenshot is 374 × 993 px.
+- Desktop state: public home with no profile open, 1440 × 1000 CSS viewport, DPR 1.
+- Final mobile implementation: `qa/implementation-mobile-map-layer-v6.png`
+- Mobile state: public home with the captain tab selected, 390 × 844 CSS viewport; full-page capture is 374 × 993 px after scrollbar exclusion.
 - Full-view comparison: `qa/comparison-v4.png`. The source was center-cropped and normalized to the implementation dimensions.
 - Focused profile comparison: `qa/comparison-profile-v3.png`.
 - Focused before/after hero comparison: `qa/comparison-hero-shift-v4.png`.
@@ -21,8 +23,8 @@
 ## Required fidelity surfaces
 
 - Fonts and typography: the heavy black display hierarchy, vermilion `AI`, compact blue profile headings, and small editorial labels remain consistent with the source direction.
-- Spacing and layout: headline, portrait composition, event label, profile card, timeline, and footer remain aligned. The map now reaches the right portrait edge without creating horizontal overflow.
-- Colors and tokens: warm ivory, black, vermilion, and cobalt remain unchanged. The map stays at 7% opacity on desktop and 6% on tablet; desktop profile background remains `rgba(255, 250, 244, 0.68)` with an 8 px blur.
+- Spacing and layout: headline, portrait composition, event label, profile card, timeline, and footer remain aligned. The 340 × 410 px desktop map starts behind the event title, reaches the right portrait edge, and creates no horizontal overflow.
+- Colors and tokens: warm ivory, black, vermilion, and cobalt remain unchanged. The map stays at 6% opacity on desktop and tablet; desktop profile background remains `rgba(255, 250, 244, 0.68)` with an 8 px blur.
 - Image quality: the supplied high-resolution five-person portrait, LinkSee mark, and vector Macau map remain sharp. The map uses its existing SVG content with a layered mask rather than a replacement asset.
 - Copy and content: competition, track, project, and member content are unchanged. No visible or accessible `05 / MEMBERS` decoration remains.
 
@@ -64,6 +66,17 @@
 - Mobile evidence: the map remains hidden below 700 px and all five member buttons remain present.
 - No actionable P0/P1/P2 issue remains after the focused comparison.
 
+### V6 event-title layer pass
+
+- P2: the enlarged map still read as a separate block anchored below the red underline rather than part of the event-title composition.
+  - Fix: moved the map to `top: -18px` and `right: -54px` inside the event lockup, enlarged it to 340 × 410 px, and isolated that lockup’s stacking context.
+  - Fix: placed the map at `z-index: -1`, leaving the event title and underline in the foreground, and moved the bottom fade start to 76% so the texture dissolves at the nearest hairline.
+  - Post-fix evidence: `qa/comparison-map-layer-v6.png` and `qa/comparison-map-layer-focus-v6.png`.
+- Desktop evidence: the event title is the topmost hit target over the map, the map measures 340 × 410 px at 6% opacity, and the page has no horizontal overflow.
+- Tablet evidence: the map measures 240 × 300 px at 6% opacity, ends at the portrait-stage boundary within its fade, retains all five member buttons, and creates no horizontal overflow.
+- Mobile evidence: the map is `display: none`, all five member buttons remain present, and there is no horizontal overflow.
+- No actionable P0/P1/P2 issue remains after the full-view and focused comparisons.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.
@@ -73,6 +86,7 @@
 - Tablet at 800 px uses the same stable member-tab layout with no horizontal overflow.
 - Hero copy uses the intended 116 px desktop top offset, 60 px tablet padding, and 38 px mobile padding; the hover hint is hidden on touch layouts.
 - Timeline playback advances and changes the control to pause.
+- The latest desktop render exposes all five portrait hotspots with clear accessible names, and no profile is shown away from a member. The map remains non-interactive and hidden from assistive technology.
 - `/admin` unlocks, keeps the captain first, and successfully saves unchanged data.
 - Public and admin browser consoles contain no errors or warnings.
 
