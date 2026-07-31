@@ -235,7 +235,7 @@ function TeamHome({ team }) {
 
       <footer className="site-footer">
         <span>LINKSEE · MACAU STORIES WITH AI</span>
-        <a href="/admin">管理内容</a>
+        <a href="/?view=admin">管理内容</a>
       </footer>
     </main>
   );
@@ -464,7 +464,11 @@ export function App() {
     );
   }
 
-  return window.location.pathname.startsWith("/admin") ? (
+  const isAdmin =
+    window.location.pathname.startsWith("/admin") ||
+    new URLSearchParams(window.location.search).get("view") === "admin";
+
+  return isAdmin ? (
     <AdminPage initialTeam={team} />
   ) : (
     <TeamHome team={team} />
