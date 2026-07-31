@@ -317,7 +317,6 @@ function AdminPage({ initialTeam }) {
               进入后台
             </button>
           </form>
-          <p className="admin-hint">本地默认密码：linksee-admin</p>
           <a href="/" className="text-link">
             返回团队首页
           </a>

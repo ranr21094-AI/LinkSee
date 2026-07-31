@@ -18,3 +18,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Keep the hero copy vertically compact: desktop starts 32px higher than the original mock, tablet 20px higher, and mobile 16px higher. On desktop, the hover/focus hint is anchored 16px below the project underline.
 - Desktop interaction uses hover and keyboard focus; each member's 68%-opaque profile card appears beside their portrait. Touch layouts use member tabs with a solid profile card below the portrait.
 - Team content is editable from `/admin` and persisted through the local API.
+- Never expose the admin password or a password hint in the public interface.

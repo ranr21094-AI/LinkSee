@@ -502,11 +502,6 @@ a {
   line-height: 1.7;
 }
 
-.admin-hint {
-  color: var(--muted);
-  font-size: 12px;
-}
-
 .admin-section {
   padding: 40px 0;
   border-bottom: 1px solid var(--line);
