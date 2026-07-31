@@ -19,4 +19,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Desktop interaction uses hover and keyboard focus; each member's 68%-opaque profile card appears beside their portrait. Touch layouts use member tabs with a solid profile card below the portrait.
 - Team content is editable from `/admin` and persisted through the local API.
 - Never expose the admin password or a password hint in the public interface.
-- Use the supplied Macau location map as a cobalt-blue decorative watermark: right-aligned over the portrait stage on desktop and tablet, centered within the portrait stage on mobile, always below interactive hotspots and profile cards.
+- Place the supplied cobalt-blue Macau location map directly below the event-name red underline in the upper-right whitespace; keep it outside the portrait stage so it never covers a person.

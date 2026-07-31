@@ -142,7 +142,16 @@ function TeamHome({ team }) {
     <main className="site-shell">
       <header className="site-header">
         <Brand teamName={team.teamName} />
-        <p className="event-name">{team.eventName}</p>
+        <div className="event-lockup">
+          <p className="event-name">{team.eventName}</p>
+          <img
+            src="/assets/macau-map-watermark.svg"
+            alt=""
+            aria-hidden="true"
+            className="macau-map-watermark"
+            draggable="false"
+          />
+        </div>
       </header>
 
       <section className="hero" aria-labelledby="hero-title">
@@ -165,13 +174,6 @@ function TeamHome({ team }) {
             src="/assets/team-portrait-stage.png"
             alt="LinkSee 五位成员形象，三位女性与两位男性"
             className="team-portrait"
-          />
-          <img
-            src="/assets/macau-map-watermark.svg"
-            alt=""
-            aria-hidden="true"
-            className="macau-map-watermark"
-            draggable="false"
           />
 
           <div className="portrait-hotspots" aria-label="选择团队成员">
