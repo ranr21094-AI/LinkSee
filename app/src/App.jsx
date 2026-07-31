@@ -129,9 +129,15 @@ function StoryTimeline() {
 
 function TeamHome({ team }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [desktopActiveIndex, setDesktopActiveIndex] = useState(null);
   const activeMember = team.members[activeIndex] || team.members[0];
-  const activeSlot =
-    portraitSlots[activeIndex] || portraitSlots[portraitSlots.length - 1];
+  const desktopActiveMember =
+    desktopActiveIndex === null ? null : team.members[desktopActiveIndex];
+  const desktopActiveSlot =
+    desktopActiveIndex === null
+      ? null
+      : portraitSlots[desktopActiveIndex] ||
+        portraitSlots[portraitSlots.length - 1];
   const headlineWithoutAi = team.headline.replace(/^AI/, "");
   const headlineSplitAt = headlineWithoutAi.indexOf("即");
   const headlineLead =
@@ -183,28 +189,27 @@ function TeamHome({ team }) {
                 <button
                   type="button"
                   key={member.id}
-                  className={`portrait-hotspot portrait-hotspot--${slot.key}${
-                    activeIndex === index ? " is-active" : ""
-                  }`}
-                  aria-pressed={activeIndex === index}
+                  className={`portrait-hotspot portrait-hotspot--${slot.key}`}
                   aria-label={`查看${member.name}的介绍`}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onFocus={() => setActiveIndex(index)}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  <span>
-                    {slot.number} · {member.name}
-                  </span>
-                </button>
+                  onMouseEnter={() => setDesktopActiveIndex(index)}
+                  onMouseLeave={() => setDesktopActiveIndex(null)}
+                  onFocus={() => setDesktopActiveIndex(index)}
+                  onBlur={() => setDesktopActiveIndex(null)}
+                />
               );
             })}
           </div>
 
-          <div
-            className={`member-profile-wrap member-profile-wrap--${activeSlot.key}`}
-          >
-            <MemberProfile member={activeMember} index={activeIndex} />
-          </div>
+          {desktopActiveMember && desktopActiveSlot ? (
+            <div
+              className={`member-profile-wrap member-profile-wrap--${desktopActiveSlot.key}`}
+            >
+              <MemberProfile
+                member={desktopActiveMember}
+                index={desktopActiveIndex}
+              />
+            </div>
+          ) : null}
 
           <StoryTimeline />
         </div>
@@ -236,12 +241,16 @@ function TeamHome({ team }) {
   );
 }
 
-function Field({ label, value, onChange, multiline = false }) {
+function Field({ label, value, onChange, multiline = false, type = "text" }) {
   const Control = multiline ? "textarea" : "input";
   return (
     <label className="admin-field">
       <span>{label}</span>
-      <Control value={value} onChange={(event) => onChange(event.target.value)} />
+      <Control
+        {...(multiline ? {} : { type })}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
     </label>
   );
 }
@@ -321,7 +330,12 @@ function AdminPage({ initialTeam }) {
               setUnlocked(true);
             }}
           >
-            <Field label="管理密码" value={password} onChange={setPassword} />
+            <Field
+              label="管理密码"
+              type="password"
+              value={password}
+              onChange={setPassword}
+            />
             <button type="submit" className="primary-button">
               进入后台
             </button>

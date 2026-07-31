@@ -16,7 +16,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Do not show a large `05` or `MEMBERS` decoration on the public page.
 - Public copy uses `LinkSee`, `灣區AI未來青年創造營`, `创意引擎 — AI想象力即“超能力”`, and `用AI视频讲述澳门故事`.
 - Keep the hero copy vertically compact: desktop starts 32px higher than the original mock, tablet 20px higher, and mobile 16px higher. On desktop, the hover/focus hint is anchored 16px below the project underline.
-- Desktop interaction uses hover and keyboard focus; each member's 68%-opaque profile card appears beside their portrait. Touch layouts use member tabs with a solid profile card below the portrait.
+- Desktop profile cards are transient: no member is shown by default, hover or keyboard focus reveals that member's 68%-opaque card beside their portrait, and pointer leave or blur hides it immediately. Clicking does not pin a card, and portrait hotspots never show numbered/name badges. Touch layouts continue to use member tabs with a solid profile card below the portrait.
 - Team content is editable from `/admin` and persisted through the local API.
 - Never expose the admin password or a password hint in the public interface.
-- Place the supplied cobalt-blue Macau location map directly below the event-name red underline in the upper-right whitespace; keep it outside the portrait stage so it never covers a person.
+- Place the supplied cobalt-blue Macau location map directly below the event-name red underline in the upper-right whitespace, outside the portrait stage so it never covers a person. Treat it as an enlarged background texture: crop it against the right page edge, fade its left edge, use about 7% opacity on desktop and 6% on tablet, and hide it below 700px.
