@@ -44,7 +44,7 @@ async function readRequestBody(request) {
 }
 
 function validateTeam(team) {
-  const requiredTeamFields = ["teamName", "eventName", "trackTitle", "headline", "projectLine"];
+  const requiredTeamFields = ["teamName", "eventName", "contactEmail", "projectLine"];
   const requiredMemberFields = ["id", "name", "role", "age", "gender", "school", "major", "tagline"];
   const requiredProjectFields = ["name", "tagline", "summary", "audience", "researchNote"];
 

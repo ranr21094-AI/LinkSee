@@ -11,8 +11,7 @@ const portraitSlots = [
 const teamFields = [
   ["teamName", "队伍名称"],
   ["eventName", "比赛名称"],
-  ["trackTitle", "赛道标题"],
-  ["headline", "主标题"],
+  ["contactEmail", "联系邮箱"],
   ["projectLine", "核心定位"],
 ];
 
@@ -296,11 +295,8 @@ function TeamHome({ team }) {
       ? null
       : portraitSlots[desktopActiveIndex] ||
         portraitSlots[portraitSlots.length - 1];
-  const headlineWithoutAi = team.headline.replace(/^AI/, "");
-  const headlineSplitAt = headlineWithoutAi.indexOf("即");
-  const headlineLead =
-    headlineSplitAt >= 0 ? headlineWithoutAi.slice(0, headlineSplitAt) : headlineWithoutAi;
-  const headlineTail = headlineSplitAt >= 0 ? headlineWithoutAi.slice(headlineSplitAt) : "";
+  const [projectNameLead, ...projectNameTailParts] = team.project.name.split("·");
+  const projectNameTail = projectNameTailParts.join("·");
 
   return (
     <main className="site-shell">
@@ -320,11 +316,15 @@ function TeamHome({ team }) {
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="track-title">{team.trackTitle} —</p>
+          <p className="hero-project-kicker">SOCIAL INNOVATION / 社会创新</p>
           <h1 id="hero-title">
-            <span className="headline-ai">AI</span>
-            {headlineLead}
-            {headlineTail && <span className="headline-tail">{headlineTail}</span>}
+            {projectNameLead}
+            {projectNameTail && (
+              <>
+                <span className="project-name-dot">·</span>
+                {projectNameTail}
+              </>
+            )}
           </h1>
           <p className="project-line">{team.projectLine}</p>
           <p className="hover-hint">
@@ -395,7 +395,12 @@ function TeamHome({ team }) {
 
       <footer className="site-footer">
         <span>LINKSEE · ACCESSIBLE MACAU JOURNEY</span>
-        <a href="/?view=admin">管理内容</a>
+        <div className="footer-links">
+          <a href={`mailto:${team.contactEmail}`}>
+            CONTACT · {team.contactEmail}
+          </a>
+          <a href="/?view=admin">管理内容</a>
+        </div>
       </footer>
     </main>
   );

@@ -89,6 +89,12 @@
 - Desktop at 1440 px and mobile at 390 px have no horizontal overflow. Mobile keeps all five member tabs, hides the map, uses the solid profile card, and stacks all new content sections into one readable column.
 - Added a site-specific social sharing image at `public/og.png` with matching warm-ivory, black, vermilion, and cobalt art direction.
 
+### V8 project-title and contact pass
+
+- Removed the public `创意引擎 / AI想象力即“超能力”` heading and promoted `声路·澳门` to the Hero title, with the middle dot carrying the existing vermilion accent.
+- Added `winnyng0327@gmail.com` as a clickable footer contact and as an editable field in `/admin`.
+- Kept the social-innovation positioning, member interaction, project sections, portrait, map treatment, and responsive rules unchanged.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.
