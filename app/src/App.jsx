@@ -75,6 +75,10 @@ function Brand({ teamName }) {
   );
 }
 
+function publicMemberName(member) {
+  return member.isCaptain ? `队长·${member.name}` : member.name;
+}
+
 function MemberProfile({ member, index, compact = false }) {
   if (!member) return null;
 
@@ -86,7 +90,7 @@ function MemberProfile({ member, index, compact = false }) {
       <header className="profile-heading">
         <div>
           <p>{member.role}</p>
-          <h2>{member.name}</h2>
+          <h2>{publicMemberName(member)}</h2>
         </div>
         <span>{String(index + 1).padStart(2, "0")}</span>
       </header>
@@ -348,7 +352,7 @@ function TeamHome({ team }) {
                   type="button"
                   key={member.id}
                   className={`portrait-hotspot portrait-hotspot--${slot.key}`}
-                  aria-label={`查看${member.name}的介绍`}
+                  aria-label={`查看${publicMemberName(member)}的介绍`}
                   onMouseEnter={() => setDesktopActiveIndex(index)}
                   onMouseLeave={() => setDesktopActiveIndex(null)}
                   onFocus={() => setDesktopActiveIndex(index)}
@@ -381,7 +385,7 @@ function TeamHome({ team }) {
               onClick={() => setActiveIndex(index)}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
-              {member.name}
+              {publicMemberName(member)}
             </button>
           ))}
         </div>

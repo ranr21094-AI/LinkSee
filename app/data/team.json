@@ -69,7 +69,7 @@
       "age": "21",
       "gender": "女",
       "school": "中国人民大学",
-      "major": "政治学",
+      "major": "政治学与行政学",
       "tagline": "LinkSee必胜",
       "isCaptain": true
     },
@@ -102,7 +102,7 @@
       "age": "23",
       "gender": "女",
       "school": "香港科技大学",
-      "major": "MFA",
+      "major": "计算机艺术",
       "tagline": "用视觉语言连接澳门的过去与未来。",
       "isCaptain": false
     },

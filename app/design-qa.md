@@ -95,6 +95,12 @@
 - Added `winnyng0327@gmail.com` as a clickable footer contact and as an editable field in `/admin`.
 - Kept the social-innovation positioning, member interaction, project sections, portrait, map treatment, and responsive rules unchanged.
 
+### V9 Hero clearance and member corrections
+
+- Raised the desktop Hero copy from `116px` to `92px`, moving the project title, positioning underline, and hover hint together so the red line clears the nearest portrait hair.
+- Public captain labels now read `队长·吳芸曦`; the editable source name remains `吳芸曦`.
+- Corrected 吳芸曦's major to `政治学与行政学` and 张燕菲's major to `计算机艺术` in both local and published team data.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.

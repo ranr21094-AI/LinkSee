@@ -93,6 +93,14 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.ok(source.project.goals.shortTerm);
   assert.ok(source.project.goals.longTerm);
   assert.equal(source.members.find((member) => member.id === "lou-wuchen").gender, "女");
+  assert.equal(
+    source.members.find((member) => member.id === "wu-yunxi").major,
+    "政治学与行政学",
+  );
+  assert.equal(
+    source.members.find((member) => member.id === "zhang-yanfei").major,
+    "计算机艺术",
+  );
   assert.deepEqual(
     Object.fromEntries(source.members.map((member) => [member.name, member.role])),
     {
