@@ -46,6 +46,7 @@ async function readRequestBody(request) {
 function validateTeam(team) {
   const requiredTeamFields = ["teamName", "eventName", "trackTitle", "headline", "projectLine"];
   const requiredMemberFields = ["id", "name", "role", "age", "gender", "school", "major", "tagline"];
+  const requiredProjectFields = ["name", "tagline", "summary", "audience", "researchNote"];
 
   if (!team || typeof team !== "object") throw new Error("团队数据格式错误");
   if (!Array.isArray(team.members) || team.members.length !== 5) {
@@ -55,6 +56,44 @@ function validateTeam(team) {
   for (const key of requiredTeamFields) {
     if (typeof team[key] !== "string" || !team[key].trim()) {
       throw new Error(`缺少团队字段：${key}`);
+    }
+  }
+
+  if (!team.project || typeof team.project !== "object") {
+    throw new Error("缺少参赛项目资料");
+  }
+
+  for (const key of requiredProjectFields) {
+    if (typeof team.project[key] !== "string" || !team.project[key].trim()) {
+      throw new Error(`缺少项目字段：${key}`);
+    }
+  }
+
+  for (const group of ["features", "journey", "highlights"]) {
+    if (!Array.isArray(team.project[group]) || team.project[group].length !== 3) {
+      throw new Error(`项目字段 ${group} 必须保留三项`);
+    }
+
+    team.project[group].forEach((item, index) => {
+      for (const key of ["title", "description"]) {
+        if (typeof item?.[key] !== "string" || !item[key].trim()) {
+          throw new Error(`项目字段 ${group} 第 ${index + 1} 项缺少 ${key}`);
+        }
+      }
+    });
+  }
+
+  for (const [group, keys] of Object.entries({
+    painPoints: ["current", "impact", "limitations"],
+    goals: ["shortTerm", "longTerm"],
+  })) {
+    if (!team.project[group] || typeof team.project[group] !== "object") {
+      throw new Error(`缺少项目字段：${group}`);
+    }
+    for (const key of keys) {
+      if (typeof team.project[group][key] !== "string" || !team.project[group][key].trim()) {
+        throw new Error(`缺少项目字段：${group}.${key}`);
+      }
     }
   }
 

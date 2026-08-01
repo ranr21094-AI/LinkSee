@@ -13,7 +13,26 @@ const teamFields = [
   ["eventName", "比赛名称"],
   ["trackTitle", "赛道标题"],
   ["headline", "主标题"],
-  ["projectLine", "项目介绍"],
+  ["projectLine", "核心定位"],
+];
+
+const projectFields = [
+  ["name", "项目名称"],
+  ["tagline", "项目口号"],
+  ["summary", "产品 / 方案描述", true],
+  ["audience", "服务群体", true],
+  ["researchNote", "调研与表达边界", true],
+];
+
+const painPointFields = [
+  ["current", "现状问题"],
+  ["impact", "影响范围"],
+  ["limitations", "现有方案不足"],
+];
+
+const goalFields = [
+  ["shortTerm", "赛事期间目标"],
+  ["longTerm", "赛后长期愿景"],
 ];
 
 const memberFields = [
@@ -67,17 +86,13 @@ function MemberProfile({ member, index, compact = false }) {
     >
       <header className="profile-heading">
         <div>
-          <p>{member.isCaptain ? "CAPTAIN" : member.role}</p>
+          <p>{member.role}</p>
           <h2>{member.name}</h2>
         </div>
         <span>{String(index + 1).padStart(2, "0")}</span>
       </header>
 
       <dl className="profile-facts">
-        <div>
-          <dt>年龄</dt>
-          <dd>{member.age}岁</dd>
-        </div>
         <div>
           <dt>性别</dt>
           <dd>{member.gender}</dd>
@@ -137,6 +152,139 @@ function StoryTimeline() {
   );
 }
 
+function SectionHeading({ index, eyebrow, title, description, inverse = false }) {
+  return (
+    <header className={`section-heading${inverse ? " section-heading--inverse" : ""}`}>
+      <p className="section-number">{index}</p>
+      <div>
+        <p className="section-eyebrow">{eyebrow}</p>
+        <h2>{title}</h2>
+        {description && <p className="section-description">{description}</p>}
+      </div>
+    </header>
+  );
+}
+
+function ProjectStory({ project }) {
+  const painPointLabels = {
+    current: "现状问题",
+    impact: "影响范围",
+    limitations: "现有方案不足",
+  };
+
+  return (
+    <div className="editorial-content">
+      <section className="content-section project-section" id="project">
+        <SectionHeading
+          index="01"
+          eyebrow="THE PROJECT / 参赛项目"
+          title={project.name}
+          description={project.tagline}
+        />
+
+        <div className="project-lede">
+          <article className="project-statement">
+            <p className="editorial-label">ONE-LINE CONCEPT</p>
+            <p>{project.summary}</p>
+          </article>
+          <aside className="audience-panel">
+            <p className="editorial-label">WHO WE SERVE / 服务群体</p>
+            <p>{project.audience}</p>
+          </aside>
+        </div>
+
+        <div className="feature-grid" aria-label="项目核心功能">
+          {project.features.map((feature, index) => (
+            <article key={feature.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="journey-block">
+          <header>
+            <p className="editorial-label">HOW IT WORKS / 使用流程</p>
+            <p>从听见方向，到抵达故事。</p>
+          </header>
+          <ol>
+            {project.journey.map((step, index) => (
+              <li key={step.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="challenge-band" id="challenge">
+        <div className="content-section challenge-section">
+          <SectionHeading
+            index="02"
+            eyebrow="WHY IT MATTERS / 现实痛点"
+            title={"不是到不了，\n而是每一步都缺少连续的提示。"}
+            inverse
+          />
+          <div className="pain-grid">
+            {Object.entries(project.painPoints).map(([key, value], index) => (
+              <article key={key}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{painPointLabels[key]}</h3>
+                <p>{value}</p>
+              </article>
+            ))}
+          </div>
+          <p className="research-note">{project.researchNote}</p>
+        </div>
+      </section>
+
+      <section className="content-section innovation-section" id="innovation">
+        <SectionHeading
+          index="03"
+          eyebrow="WHAT MAKES IT DIFFERENT / 核心亮点"
+          title="让无障碍成为体验的主叙事"
+        />
+        <div className="highlight-list">
+          {project.highlights.map((highlight, index) => (
+            <article key={highlight.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{highlight.title}</h3>
+              <p>{highlight.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="goals-band" id="goals">
+        <div className="content-section goals-section">
+          <SectionHeading
+            index="04"
+            eyebrow="OUR GOALS / 参赛目标"
+            title={"先做出一条可抵达的路，\n再让更多城市故事从这里出发。"}
+          />
+          <div className="goals-grid">
+            <article>
+              <p className="editorial-label">NOW / 赛事期间</p>
+              <h3>打磨可用原型</h3>
+              <p>{project.goals.shortTerm}</p>
+            </article>
+            <article>
+              <p className="editorial-label">NEXT / 赛事之后</p>
+              <h3>与真实使用者共同验证</h3>
+              <p>{project.goals.longTerm}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function TeamHome({ team }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [desktopActiveIndex, setDesktopActiveIndex] = useState(null);
@@ -187,8 +335,8 @@ function TeamHome({ team }) {
 
         <div className="portrait-stage">
           <img
-            src="/assets/team-portrait-stage.png"
-            alt="LinkSee 五位成员形象，三位女性与两位男性"
+            src="/assets/team-portrait-stage-v2.png"
+            alt="LinkSee 五位成员形象，四位女性与一位男性"
             className="team-portrait"
           />
 
@@ -243,8 +391,10 @@ function TeamHome({ team }) {
         </div>
       </section>
 
+      <ProjectStory project={team.project} />
+
       <footer className="site-footer">
-        <span>LINKSEE · MACAU STORIES WITH AI</span>
+        <span>LINKSEE · ACCESSIBLE MACAU JOURNEY</span>
         <a href="/?view=admin">管理内容</a>
       </footer>
     </main>
@@ -286,6 +436,35 @@ function AdminPage({ initialTeam }) {
       members: current.members.map((member, memberIndex) =>
         memberIndex === index ? { ...member, [key]: value } : member,
       ),
+    }));
+  }
+
+  function updateProjectField(key, value) {
+    setTeam((current) => ({
+      ...current,
+      project: { ...current.project, [key]: value },
+    }));
+  }
+
+  function updateProjectNested(group, key, value) {
+    setTeam((current) => ({
+      ...current,
+      project: {
+        ...current.project,
+        [group]: { ...current.project[group], [key]: value },
+      },
+    }));
+  }
+
+  function updateProjectListItem(group, index, key, value) {
+    setTeam((current) => ({
+      ...current,
+      project: {
+        ...current.project,
+        [group]: current.project[group].map((item, itemIndex) =>
+          itemIndex === index ? { ...item, [key]: value } : item,
+        ),
+      },
     }));
   }
 
@@ -332,7 +511,7 @@ function AdminPage({ initialTeam }) {
         <section>
           <p className="admin-eyebrow">CONTENT STUDIO</p>
           <h1>管理后台</h1>
-          <p>编辑比赛信息与五位成员资料。队长始终固定在第一位。</p>
+          <p>编辑比赛信息、参赛项目与五位成员资料。队长始终固定在第一位。</p>
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -435,6 +614,126 @@ function AdminPage({ initialTeam }) {
                 </div>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="admin-section">
+          <header>
+            <h2>参赛项目</h2>
+            <p>编辑项目介绍、服务群体、现实痛点、使用流程和参赛目标。</p>
+          </header>
+
+          <div className="admin-grid">
+            {projectFields.map(([key, label, multiline]) => (
+              <Field
+                key={key}
+                label={label}
+                value={team.project[key]}
+                multiline={multiline}
+                onChange={(value) => updateProjectField(key, value)}
+              />
+            ))}
+          </div>
+
+          <div className="project-editor-group">
+            <h3>核心功能</h3>
+            {team.project.features.map((feature, index) => (
+              <div className="admin-grid" key={`feature-${index}`}>
+                <Field
+                  label={`功能 ${index + 1} 标题`}
+                  value={feature.title}
+                  onChange={(value) =>
+                    updateProjectListItem("features", index, "title", value)
+                  }
+                />
+                <Field
+                  label={`功能 ${index + 1} 描述`}
+                  value={feature.description}
+                  multiline
+                  onChange={(value) =>
+                    updateProjectListItem("features", index, "description", value)
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="project-editor-group">
+            <h3>使用流程</h3>
+            {team.project.journey.map((step, index) => (
+              <div className="admin-grid" key={`journey-${index}`}>
+                <Field
+                  label={`步骤 ${index + 1} 标题`}
+                  value={step.title}
+                  onChange={(value) =>
+                    updateProjectListItem("journey", index, "title", value)
+                  }
+                />
+                <Field
+                  label={`步骤 ${index + 1} 描述`}
+                  value={step.description}
+                  multiline
+                  onChange={(value) =>
+                    updateProjectListItem("journey", index, "description", value)
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="project-editor-group">
+            <h3>现实痛点</h3>
+            <div className="admin-grid">
+              {painPointFields.map(([key, label]) => (
+                <Field
+                  key={key}
+                  label={label}
+                  value={team.project.painPoints[key]}
+                  multiline
+                  onChange={(value) =>
+                    updateProjectNested("painPoints", key, value)
+                  }
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="project-editor-group">
+            <h3>核心亮点</h3>
+            {team.project.highlights.map((highlight, index) => (
+              <div className="admin-grid" key={`highlight-${index}`}>
+                <Field
+                  label={`亮点 ${index + 1} 标题`}
+                  value={highlight.title}
+                  onChange={(value) =>
+                    updateProjectListItem("highlights", index, "title", value)
+                  }
+                />
+                <Field
+                  label={`亮点 ${index + 1} 描述`}
+                  value={highlight.description}
+                  multiline
+                  onChange={(value) =>
+                    updateProjectListItem("highlights", index, "description", value)
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="project-editor-group">
+            <h3>参赛目标</h3>
+            <div className="admin-grid">
+              {goalFields.map(([key, label]) => (
+                <Field
+                  key={key}
+                  label={label}
+                  value={team.project.goals[key]}
+                  multiline
+                  onChange={(value) => updateProjectNested("goals", key, value)}
+                />
+              ))}
+            </div>
           </div>
         </section>
 

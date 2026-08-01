@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 import worker from "../worker/index.js";
 
@@ -65,4 +65,39 @@ test("emits the files required by Sites packaging", async () => {
   await access(new URL("../dist/client/index.html", import.meta.url));
   await access(new URL("../dist/server/index.js", import.meta.url));
   await access(new URL("../dist/.openai/hosting.json", import.meta.url));
+  await access(new URL("../dist/client/assets/team-portrait-stage-v2.png", import.meta.url));
+  await access(new URL("../dist/client/og.png", import.meta.url));
+});
+
+test("publishes the complete assignment and Sound Road project content", async () => {
+  const source = JSON.parse(
+    await readFile(new URL("../data/team.json", import.meta.url), "utf8"),
+  );
+  const published = JSON.parse(
+    await readFile(new URL("../public/team.json", import.meta.url), "utf8"),
+  );
+
+  assert.deepEqual(published, source);
+  assert.match(source.projectLine, /社会创新/);
+  assert.equal(source.project.name, "声路·澳门");
+  assert.equal(source.project.features.length, 3);
+  assert.equal(source.project.journey.length, 3);
+  assert.equal(source.project.highlights.length, 3);
+  assert.ok(source.project.audience);
+  assert.ok(source.project.painPoints.current);
+  assert.ok(source.project.painPoints.impact);
+  assert.ok(source.project.painPoints.limitations);
+  assert.ok(source.project.goals.shortTerm);
+  assert.ok(source.project.goals.longTerm);
+  assert.equal(source.members.find((member) => member.id === "lou-wuchen").gender, "女");
+  assert.deepEqual(
+    Object.fromEntries(source.members.map((member) => [member.name, member.role])),
+    {
+      "吳芸曦": "产品策划与统筹（PM/策划） + 队长",
+      "娄午尘": "测试与辅助开发（场外支援/机动）",
+      "李佩珊": "视觉与美术设计（UI/美术）",
+      "张燕菲": "硬件交互与建模设计（数据/音效/文案）",
+      "冉冉": "游戏开发工程师（技术主程）",
+    },
+  );
 });

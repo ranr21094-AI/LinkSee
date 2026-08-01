@@ -14,6 +14,8 @@
 - Mobile evidence: `qa/implementation-mobile-map-layer-v6.png`, 390 × 844 CSS viewport, DPR 1; full-page screenshot is 374 × 993 px.
 - Desktop state: public home with no profile open, 1440 × 1000 CSS viewport, DPR 1.
 - Final mobile implementation: `qa/implementation-mobile-map-layer-v6.png`
+- Latest assignment-complete desktop capture: `qa/implementation-project-v7.png`, 1440 × 1000 CSS viewport.
+- Latest assignment-complete mobile capture: `qa/implementation-mobile-project-v7.png`, 390 × 844 CSS viewport.
 - Mobile state: public home with the captain tab selected, 390 × 844 CSS viewport; full-page capture is 374 × 993 px after scrollbar exclusion.
 - Full-view comparison: `qa/comparison-v4.png`. The source was center-cropped and normalized to the implementation dimensions.
 - Focused profile comparison: `qa/comparison-profile-v3.png`.
@@ -76,6 +78,16 @@
 - Tablet evidence: the map measures 240 × 300 px at 6% opacity, ends at the portrait-stage boundary within its fade, retains all five member buttons, and creates no horizontal overflow.
 - Mobile evidence: the map is `display: none`, all five member buttons remain present, and there is no horizontal overflow.
 - No actionable P0/P1/P2 issue remains after the full-view and focused comparisons.
+
+### V7 assignment and project-content pass
+
+- Added the complete `声路·澳门` assignment narrative below the existing member Hero: product description, service audience, three features, three-step flow, pain-point analysis, three innovations, and short/long-term goals.
+- Changed the Hero core positioning to the approved social-innovation statement while preserving the existing track title and event lockup.
+- Updated the portrait to four women and one man; the left-middle slot now represents 娄午尘 as a woman. The remaining four figures, crop, background, and interaction positions are unchanged.
+- Public member profiles no longer show age, retain gender/school/major/tagline, and display the full approved responsibility label. Age remains editable in the local admin data.
+- Added project-content editors and validation to `/admin`; an unchanged save completed successfully and kept the captain first.
+- Desktop at 1440 px and mobile at 390 px have no horizontal overflow. Mobile keeps all five member tabs, hides the map, uses the solid profile card, and stacks all new content sections into one readable column.
+- Added a site-specific social sharing image at `public/og.png` with matching warm-ivory, black, vermilion, and cobalt art direction.
 
 ## Functional and responsive checks
 
