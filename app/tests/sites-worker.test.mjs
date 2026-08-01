@@ -104,11 +104,15 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.deepEqual(
     Object.fromEntries(source.members.map((member) => [member.name, member.role])),
     {
-      "吳芸曦": "产品策划与统筹（PM/策划） + 队长",
+      "吳芸曦": "产品策划与统筹（PM/策划）",
       "娄午尘": "测试与辅助开发（场外支援/机动）",
       "李佩珊": "视觉与美术设计（UI/美术）",
       "张燕菲": "硬件交互与建模设计（数据/音效/文案）",
       "冉冉": "游戏开发工程师（技术主程）",
     },
+  );
+  assert.equal(
+    source.members.find((member) => member.id === "wu-yunxi").tagline,
+    "让每一次抵达，都被城市温柔看见。",
   );
 });

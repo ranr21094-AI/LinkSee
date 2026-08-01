@@ -20,6 +20,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Desktop profile cards are transient: no member is shown by default, hover or keyboard focus reveals that member's 68%-opaque card beside their portrait, and pointer leave or blur hides it immediately. Clicking does not pin a card, and portrait hotspots never show numbered/name badges. Touch layouts continue to use member tabs with a solid profile card below the portrait.
 - Public member profiles omit age while retaining the age field in local admin data. The role line displays each member's complete responsibility label.
 - Prefix the captain's public-facing name with `队长·` while keeping the editable raw name as `吳芸曦`.
+- Keep the captain role as `产品策划与统筹（PM/策划）` without a second captain suffix; her public tagline is `让每一次抵达，都被城市温柔看见。`.
 - Team content is editable from `/admin` and persisted through the local API.
 - Below the member Hero, present the complete assignment narrative for `声路·澳门`: product description, service audience, three core features, three-step flow, pain-point analysis, three innovations, and short/long-term goals. Keep this content editable in `/admin`; do not add a cross-project launch button.
 - Never expose the admin password or a password hint in the public interface.

@@ -101,6 +101,11 @@
 - Public captain labels now read `队长·吳芸曦`; the editable source name remains `吳芸曦`.
 - Corrected 吳芸曦's major to `政治学与行政学` and 张燕菲's major to `计算机艺术` in both local and published team data.
 
+### V10 captain copy refinement
+
+- Removed the redundant `+ 队长` suffix from 吳芸曦's role because her public name already carries the `队长·` prefix.
+- Replaced the former competitive tagline with `让每一次抵达，都被城市温柔看见。`, matching the project's inclusive-city theme.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.
