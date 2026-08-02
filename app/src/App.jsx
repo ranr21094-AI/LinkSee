@@ -8,6 +8,13 @@ const portraitSlots = [
   { key: "engineer", number: "05" },
 ];
 
+const pageGuideItems = [
+  { number: "01", label: "参赛项目", href: "#project" },
+  { number: "02", label: "现实痛点", href: "#challenge" },
+  { number: "03", label: "核心亮点", href: "#innovation" },
+  { number: "04", label: "参赛目标", href: "#goals" },
+];
+
 const teamFields = [
   ["teamName", "队伍名称"],
   ["eventName", "比赛名称"],
@@ -335,6 +342,14 @@ function TeamHome({ team }) {
             <span>HOVER / FOCUS</span>
             悬停头像，认识我们
           </p>
+          <nav className="page-guide" aria-label="页面导览">
+            {pageGuideItems.map((item) => (
+              <a key={item.href} href={item.href}>
+                <span>{item.number}</span>
+                {item.label}
+              </a>
+            ))}
+          </nav>
         </div>
 
         <div className="portrait-stage">

@@ -21,6 +21,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Public member profiles omit age while retaining the age field in local admin data. The role line displays each member's complete responsibility label.
 - Prefix the captain's public-facing name with `队长·` while keeping the editable raw name as `吳芸曦`.
 - Keep the captain role as `产品策划与统筹（PM/策划）` without a second captain suffix; her public tagline is `让每一次抵达，都被城市温柔看见。`.
+- Place a four-link page guide directly below the desktop hover/focus hint, targeting the project, challenge, innovation, and goals sections. Keep the guide independently visible and horizontally scrollable on tablet and mobile even though the hover hint is hidden there.
 - Team content is editable from `/admin` and persisted through the local API.
 - Below the member Hero, present the complete assignment narrative for `声路·澳门`: product description, service audience, three core features, three-step flow, pain-point analysis, three innovations, and short/long-term goals. Keep this content editable in `/admin`; do not add a cross-project launch button.
 - Never expose the admin password or a password hint in the public interface.

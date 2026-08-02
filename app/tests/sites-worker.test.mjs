@@ -70,6 +70,7 @@ test("emits the files required by Sites packaging", async () => {
 });
 
 test("publishes the complete assignment and Sound Road project content", async () => {
+  const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
   const source = JSON.parse(
     await readFile(new URL("../data/team.json", import.meta.url), "utf8"),
   );
@@ -86,6 +87,10 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.equal(source.project.features.length, 3);
   assert.equal(source.project.journey.length, 3);
   assert.equal(source.project.highlights.length, 3);
+  assert.match(appSource, /aria-label="页面导览"/);
+  for (const href of ["#project", "#challenge", "#innovation", "#goals"]) {
+    assert.match(appSource, new RegExp(`href: "${href}"`));
+  }
   assert.ok(source.project.audience);
   assert.ok(source.project.painPoints.current);
   assert.ok(source.project.painPoints.impact);
@@ -99,7 +104,7 @@ test("publishes the complete assignment and Sound Road project content", async (
   );
   assert.equal(
     source.members.find((member) => member.id === "zhang-yanfei").major,
-    "计算机艺术",
+    "计算艺术",
   );
   assert.deepEqual(
     Object.fromEntries(source.members.map((member) => [member.name, member.role])),

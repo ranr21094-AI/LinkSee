@@ -106,6 +106,12 @@
 - Removed the redundant `+ 队长` suffix from 吳芸曦's role because her public name already carries the `队长·` prefix.
 - Replaced the former competitive tagline with `让每一次抵达，都被城市温柔看见。`, matching the project's inclusive-city theme.
 
+### V11 page guide and member correction
+
+- Corrected 张燕菲's major to `计算艺术` in both local and published team data.
+- Added a four-link page guide below the desktop hover/focus hint for the project, challenge, innovation, and goals sections.
+- Kept the guide visible as a horizontally scrollable control on tablet and mobile while the hover-only instruction remains hidden.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.
@@ -113,7 +119,7 @@
 - Cards stay inside the portrait stage and beside the related figure without covering that member's face.
 - Mobile at 390 px has no horizontal overflow, retains member tabs, hides the desktop card, and uses a solid profile card.
 - Tablet at 800 px uses the same stable member-tab layout with no horizontal overflow.
-- Hero copy uses the intended 116 px desktop top offset, 60 px tablet padding, and 38 px mobile padding; the hover hint is hidden on touch layouts.
+- Hero copy uses the intended 92 px desktop top offset, 60 px tablet padding, and 38 px mobile padding; the hover hint is hidden on touch layouts while the page guide remains available.
 - Timeline playback advances and changes the control to pause.
 - The latest desktop render exposes all five portrait hotspots with clear accessible names, and no profile is shown away from a member. The map remains non-interactive and hidden from assistive technology.
 - `/admin` unlocks, keeps the captain first, and successfully saves unchanged data.
