@@ -1,5 +1,6 @@
 const TEAM_ROW_ID = 1;
 const MAX_TEAM_PAYLOAD_BYTES = 1024 * 1024;
+const CORS_ORIGINS = new Set(["https://ranr21094-ai.github.io"]);
 const FALLBACK_ADMIN_PASSWORD_HASH =
   "aad443156fcda374c4e23db4d639904c98dbfaeda47391812b772f47cbb134d9";
 const teamTableSql = `CREATE TABLE IF NOT EXISTS team_content (
@@ -8,10 +9,26 @@ const teamTableSql = `CREATE TABLE IF NOT EXISTS team_content (
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 )`;
 
-function jsonResponse(payload, status = 200) {
+function corsHeaders(request) {
+  const origin = request.headers.get("origin");
+  if (!CORS_ORIGINS.has(origin)) return {};
+
+  return {
+    "access-control-allow-origin": origin,
+    "access-control-allow-methods": "GET, PUT, POST, OPTIONS",
+    "access-control-allow-headers": "content-type, x-admin-password",
+    "access-control-max-age": "86400",
+    vary: "Origin",
+  };
+}
+
+function jsonResponse(payload, status = 200, request) {
   return Response.json(payload, {
     status,
-    headers: { "cache-control": "no-store" },
+    headers: {
+      "cache-control": "no-store",
+      ...(request ? corsHeaders(request) : {}),
+    },
   });
 }
 
@@ -145,19 +162,19 @@ async function getTeam(request, env) {
 
 async function saveTeam(request, env) {
   if (!(await isAdminAuthorized(request, env))) {
-    return jsonResponse({ error: "管理密码不正确" }, 401);
+    return jsonResponse({ error: "管理密码不正确" }, 401, request);
   }
-  if (!env.DB) return jsonResponse({ error: "线上内容数据库不可用" }, 503);
+  if (!env.DB) return jsonResponse({ error: "线上内容数据库不可用" }, 503, request);
 
   const body = await request.text();
   if (new TextEncoder().encode(body).byteLength > MAX_TEAM_PAYLOAD_BYTES) {
-    return jsonResponse({ error: "请求内容过大" }, 413);
+    return jsonResponse({ error: "请求内容过大" }, 413, request);
   }
 
   const team = validateTeam(JSON.parse(body));
   await ensureTeamTable(env.DB);
   await upsertTeam(env.DB, team);
-  return jsonResponse(team);
+  return jsonResponse(team, 200, request);
 }
 
 async function serveAppShell(request, env) {
@@ -172,14 +189,21 @@ export default {
     const url = new URL(request.url);
 
     try {
+      if (
+        request.method === "OPTIONS" &&
+        (url.pathname === "/api/team" || url.pathname === "/api/admin/verify")
+      ) {
+        return new Response(null, { status: 204, headers: corsHeaders(request) });
+      }
+
       if (url.pathname === "/api/admin/verify" && request.method === "POST") {
         return (await isAdminAuthorized(request, env))
-          ? jsonResponse({ ok: true })
-          : jsonResponse({ error: "管理密码不正确" }, 401);
+          ? jsonResponse({ ok: true }, 200, request)
+          : jsonResponse({ error: "管理密码不正确" }, 401, request);
       }
 
       if (url.pathname === "/api/team" && request.method === "GET") {
-        return jsonResponse(await getTeam(request, env));
+        return jsonResponse(await getTeam(request, env), 200, request);
       }
 
       if (url.pathname === "/api/team" && request.method === "PUT") {
@@ -202,7 +226,7 @@ export default {
 
       return serveAppShell(request, env);
     } catch (error) {
-      return jsonResponse({ error: error.message || "请求失败" }, 400);
+      return jsonResponse({ error: error.message || "请求失败" }, 400, request);
     }
   },
 };

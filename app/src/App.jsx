@@ -1,5 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 
+const appBase = import.meta.env.BASE_URL || "/";
+const apiOrigin = (import.meta.env.VITE_API_ORIGIN || "").replace(/\/$/, "");
+
+function appUrl(path = "") {
+  return `${appBase}${path.replace(/^\//, "")}`;
+}
+
+function apiUrl(path) {
+  return `${apiOrigin}${path}`;
+}
+
 const portraitSlots = [
   { key: "captain", number: "01" },
   { key: "developer", number: "02" },
@@ -52,11 +63,11 @@ const memberFields = [
 
 async function loadTeam() {
   try {
-    const response = await fetch("/api/team", { cache: "no-store" });
+    const response = await fetch(apiUrl("/api/team"), { cache: "no-store" });
     if (!response.ok) throw new Error("API unavailable");
     return await response.json();
   } catch {
-    const fallback = await fetch("/team.json", { cache: "no-store" });
+    const fallback = await fetch(appUrl("team.json"), { cache: "no-store" });
     if (!fallback.ok) throw new Error("团队资料加载失败");
     return fallback.json();
   }
@@ -64,8 +75,8 @@ async function loadTeam() {
 
 function Brand({ teamName }) {
   return (
-    <a className="brand-lockup" href="/" aria-label={`${teamName} 首页`}>
-      <img src="/assets/linksee-mark.png" alt="" className="brand-mark" />
+    <a className="brand-lockup" href={appBase} aria-label={`${teamName} 首页`}>
+      <img src={appUrl("assets/linksee-mark.png")} alt="" className="brand-mark" />
       <span>{teamName}</span>
     </a>
   );
@@ -317,7 +328,7 @@ function TeamHome({ team }) {
         <div className="event-lockup">
           <p className="event-name">{team.eventName}</p>
           <img
-            src="/assets/macau-map-watermark.svg"
+            src={appUrl("assets/macau-map-watermark.svg")}
             alt=""
             aria-hidden="true"
             className="macau-map-watermark"
@@ -354,7 +365,7 @@ function TeamHome({ team }) {
 
         <div className="portrait-stage">
           <img
-            src="/assets/team-portrait-stage-v2.png"
+            src={appUrl("assets/team-portrait-stage-v2.png")}
             alt="LinkSee 五位成员形象，四位女性与一位男性"
             className="team-portrait"
           />
@@ -510,7 +521,7 @@ function AdminPage({ initialTeam }) {
     setMessage("");
 
     try {
-      const response = await fetch("/api/team", {
+      const response = await fetch(apiUrl("/api/team"), {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -537,7 +548,7 @@ function AdminPage({ initialTeam }) {
     setLoginMessage("");
 
     try {
-      const response = await fetch("/api/admin/verify", {
+      const response = await fetch(apiUrl("/api/admin/verify"), {
         method: "POST",
         headers: { "x-admin-password": password },
       });
@@ -573,7 +584,7 @@ function AdminPage({ initialTeam }) {
               {verifying ? "验证中…" : "进入后台"}
             </button>
           </form>
-          <a href="/" className="text-link">
+          <a href={appBase} className="text-link">
             返回团队首页
           </a>
         </section>
@@ -588,7 +599,7 @@ function AdminPage({ initialTeam }) {
           <p className="admin-eyebrow">LINKSEE CONTENT STUDIO</p>
           <h1>管理团队内容</h1>
         </div>
-        <a href="/" className="secondary-button">
+        <a href={appBase} className="secondary-button">
           查看首页
         </a>
       </header>
@@ -824,7 +835,7 @@ export function App() {
   }
 
   const isAdmin =
-    window.location.pathname.startsWith("/admin") ||
+    /\/admin(?:\/|$)/.test(window.location.pathname) ||
     new URLSearchParams(window.location.search).get("view") === "admin";
 
   return isAdmin ? (

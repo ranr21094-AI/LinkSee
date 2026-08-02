@@ -139,6 +139,26 @@ test("verifies the admin password and persists team edits in D1", async () => {
   assert.equal((await refreshed.json()).project.journey[0].title, "开始体验");
 });
 
+test("allows the GitHub Pages frontend to use the hosted content API", async () => {
+  const origin = "https://ranr21094-ai.github.io";
+  const response = await worker.fetch(
+    new Request("https://example.test/api/team", {
+      method: "OPTIONS",
+      headers: {
+        origin,
+        "access-control-request-method": "PUT",
+        "access-control-request-headers": "content-type,x-admin-password",
+      },
+    }),
+    {},
+  );
+
+  assert.equal(response.status, 204);
+  assert.equal(response.headers.get("access-control-allow-origin"), origin);
+  assert.match(response.headers.get("access-control-allow-methods"), /PUT/);
+  assert.match(response.headers.get("access-control-allow-headers"), /x-admin-password/);
+});
+
 test("does not turn missing API or write requests into the app shell", async () => {
   for (const request of [
     new Request("https://example.test/api/missing", { headers: { accept: "application/json" } }),
@@ -193,7 +213,8 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.doesNotMatch(appSource, /SOCIAL INNOVATION \/ 社会创新/);
   assert.doesNotMatch(appSource, /className="research-note"/);
   assert.doesNotMatch(appSource, /href="\/\?view=admin"/);
-  assert.match(appSource, /fetch\("\/api\/admin\/verify"/);
+  assert.match(appSource, /apiUrl\("\/api\/admin\/verify"\)/);
+  assert.match(appSource, /appUrl\("assets\/team-portrait-stage-v2\.png"\)/);
   assert.match(appSource, /className="journey-editor-grid"/);
   assert.match(styles, /grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/);
   assert.equal(hosting.d1, "DB");
