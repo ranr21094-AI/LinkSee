@@ -90,9 +90,15 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.doesNotMatch(appSource, /SOCIAL INNOVATION \/ 社会创新/);
   assert.match(source.projectLine, /社会创新/);
   assert.equal(source.project.name, "声路·澳门");
+  assert.equal(source.project.tagline, "第一人称盲人出行体验游戏");
+  assert.equal(source.project.features[0].title, "盲杖探索");
+  assert.equal(source.project.features[1].title, "感官导航");
+  assert.equal(source.project.features[2].title, "多结局叙事");
   assert.equal(source.project.features.length, 3);
   assert.equal(source.project.journey.length, 3);
   assert.equal(source.project.highlights.length, 3);
+  assert.match(source.project.goals.shortTerm, /72 小时/);
+  assert.match(source.project.goals.longTerm, /无障碍热力图/);
   assert.match(appSource, /aria-label="页面导览"/);
   assert.ok(
     appSource.indexOf('className="page-guide"') <

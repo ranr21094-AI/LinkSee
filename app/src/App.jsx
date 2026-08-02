@@ -216,7 +216,7 @@ function ProjectStory({ project }) {
         <div className="journey-block">
           <header>
             <p className="editorial-label">HOW IT WORKS / 使用流程</p>
-            <p>从听见方向，到抵达故事。</p>
+            <p>从选择关卡，到抵达终点。</p>
           </header>
           <ol>
             {project.journey.map((step, index) => (
@@ -237,7 +237,7 @@ function ProjectStory({ project }) {
           <SectionHeading
             index="02"
             eyebrow="WHY IT MATTERS / 现实痛点"
-            title={"不是到不了，\n而是每一步都缺少连续的提示。"}
+            title={"从设施断点，\n到公众认知的断点。"}
             inverse
           />
           <div className="pain-grid">
@@ -257,7 +257,7 @@ function ProjectStory({ project }) {
         <SectionHeading
           index="03"
           eyebrow="WHAT MAKES IT DIFFERENT / 核心亮点"
-          title="让无障碍成为体验的主叙事"
+          title="把单向宣传变成第一人称体验"
         />
         <div className="highlight-list">
           {project.highlights.map((highlight, index) => (
@@ -275,17 +275,17 @@ function ProjectStory({ project }) {
           <SectionHeading
             index="04"
             eyebrow="OUR GOALS / 参赛目标"
-            title={"先做出一条可抵达的路，\n再让更多城市故事从这里出发。"}
+          title={"72 小时做出 Demo，\n再让体验走向公共教育。"}
           />
           <div className="goals-grid">
             <article>
               <p className="editorial-label">NOW / 赛事期间</p>
-              <h3>打磨可用原型</h3>
+              <h3>完成可运行 Demo</h3>
               <p>{project.goals.shortTerm}</p>
             </article>
             <article>
               <p className="editorial-label">NEXT / 赛事之后</p>
-              <h3>与真实使用者共同验证</h3>
+              <h3>拓展教育与城市参考</h3>
               <p>{project.goals.longTerm}</p>
             </article>
           </div>

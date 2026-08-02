@@ -140,6 +140,10 @@
 - Removed the standalone `SOCIAL INNOVATION / 社会创新` kicker while retaining `社会创新` in the editable core-positioning sentence.
 - The project title, positioning underline, page guide, and hover/focus instruction now move upward together from the unchanged Hero copy anchor; portrait placement remains unchanged.
 
+### V17 supplemental project copy
+
+- Reworked the 01–04 narrative from `页面补充材料.docx`: the project is now described as a first-person blind-travel experience game, with blind-cane exploration, sensory navigation, multiple endings, documented pain points, three innovation categories, and 72-hour/long-term goals.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.
