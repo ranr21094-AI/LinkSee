@@ -312,7 +312,17 @@ function TeamHome({ team }) {
   return (
     <main className="site-shell">
       <header className="site-header">
-        <Brand teamName={team.teamName} />
+        <div className="header-contact-lockup">
+          <Brand teamName={team.teamName} />
+          <a
+            className="header-contact"
+            href={`mailto:${team.contactEmail}`}
+            aria-label={`发送邮件至 ${team.contactEmail}`}
+          >
+            <span>CONTACT ·</span>
+            {team.contactEmail}
+          </a>
+        </div>
         <div className="event-lockup">
           <p className="event-name">{team.eventName}</p>
           <img

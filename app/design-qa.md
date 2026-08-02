@@ -129,6 +129,12 @@
 - Moved the four-link page guide above the desktop hover/focus instruction without changing either component's styling or behavior.
 - Touch layouts continue to show the guide while hiding the hover-only instruction.
 
+### V15 header contact
+
+- Added the editable team email as a second `mailto:` link immediately to the right of the public LinkSee brand, using the label `CONTACT ·` and a cobalt divider.
+- Desktop and tablet retain a single header row; below 700px the brand and full email remain on the first row while the event name moves to a right-aligned second row.
+- The header and footer contacts read the same `contactEmail` field, so admin edits stay synchronized.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.

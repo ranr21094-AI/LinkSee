@@ -66,9 +66,17 @@ a {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  column-gap: 32px;
   width: min(100% - 72px, 1486px);
   margin: 0 auto;
   padding-top: 34px;
+}
+
+.header-contact-lockup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
 }
 
 .brand-lockup {
@@ -86,6 +94,30 @@ a {
   width: 42px;
   height: 42px;
   object-fit: contain;
+}
+
+.header-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 16px;
+  border-left: 2px solid var(--blue);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.035em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 160ms ease;
+}
+
+.header-contact span {
+  color: var(--blue);
+  transition: color 160ms ease;
+}
+
+.header-contact:hover,
+.header-contact:hover span {
+  color: var(--red);
 }
 
 .event-lockup {
@@ -1063,6 +1095,15 @@ a {
     padding-top: 24px;
   }
 
+  .header-contact-lockup {
+    gap: 14px;
+  }
+
+  .header-contact {
+    padding-left: 14px;
+    font-size: 10px;
+  }
+
   .hero {
     min-height: auto;
     margin-top: 10px;
@@ -1214,7 +1255,22 @@ a {
 
 @media (max-width: 700px) {
   .site-header {
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .header-contact-lockup {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .header-contact {
+    gap: 4px;
+    min-width: 0;
+    padding-left: 10px;
+    font-size: 10px;
+    letter-spacing: 0;
   }
 
   .brand-lockup {
@@ -1228,9 +1284,14 @@ a {
 
   .event-name {
     max-width: 145px;
-    margin-left: 12px;
+    margin: 0;
     font-size: 11px;
     line-height: 1.35;
+  }
+
+  .event-lockup {
+    width: 100%;
+    justify-items: end;
   }
 
   .macau-map-watermark {

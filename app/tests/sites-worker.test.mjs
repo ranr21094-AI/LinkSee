@@ -80,6 +80,11 @@ test("publishes the complete assignment and Sound Road project content", async (
 
   assert.deepEqual(published, source);
   assert.equal(source.contactEmail, "winnyng0327@gmail.com");
+  assert.match(appSource, /className="header-contact"/);
+  assert.equal(
+    appSource.match(/mailto:\$\{team\.contactEmail\}/g)?.length,
+    2,
+  );
   assert.equal("trackTitle" in source, false);
   assert.equal("headline" in source, false);
   assert.match(source.projectLine, /社会创新/);
