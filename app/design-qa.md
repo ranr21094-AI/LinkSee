@@ -112,6 +112,12 @@
 - Added a four-link page guide below the desktop hover/focus hint for the project, challenge, innovation, and goals sections.
 - Kept the guide visible as a horizontally scrollable control on tablet and mobile while the hover-only instruction remains hidden.
 
+### V12 editorial spacing refinement
+
+- Narrowed the desktop 01–04 section-number rail to `112px` with a `24px` gap, moving every section title left while retaining the editorial numbering structure.
+- Reduced the audience panel's bottom inset to `22px` and the gap before the feature grid to `52px`, removing the oversized lower whitespace without changing its content.
+- Kept the existing tablet and mobile heading grids and stacked project layout unchanged.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.

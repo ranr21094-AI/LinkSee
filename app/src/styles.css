@@ -499,8 +499,8 @@ a {
 
 .section-heading {
   display: grid;
-  grid-template-columns: minmax(100px, 0.35fr) minmax(0, 1.65fr);
-  gap: 32px;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 24px;
   padding-top: 18px;
   border-top: 3px solid var(--ink);
 }
@@ -573,6 +573,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 22px;
   border-left: 1px solid var(--line);
   background: var(--blue);
   color: white;
@@ -592,7 +593,7 @@ a {
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 76px;
+  margin-top: 52px;
   border-top: 4px solid var(--red);
 }
 

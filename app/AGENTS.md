@@ -22,6 +22,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Prefix the captain's public-facing name with `队长·` while keeping the editable raw name as `吳芸曦`.
 - Keep the captain role as `产品策划与统筹（PM/策划）` without a second captain suffix; her public tagline is `让每一次抵达，都被城市温柔看见。`.
 - Place a four-link page guide directly below the desktop hover/focus hint, targeting the project, challenge, innovation, and goals sections. Keep the guide independently visible and horizontally scrollable on tablet and mobile even though the hover hint is hidden there.
+- Keep desktop section headings 01–04 on a compact `112px` number rail with a `24px` gap. The project audience card uses a tighter bottom inset, and the following feature grid begins after `52px`; tablet and mobile retain their established narrower heading grids.
 - Team content is editable from `/admin` and persisted through the local API.
 - Below the member Hero, present the complete assignment narrative for `声路·澳门`: product description, service audience, three core features, three-step flow, pain-point analysis, three innovations, and short/long-term goals. Keep this content editable in `/admin`; do not add a cross-project launch button.
 - Never expose the admin password or a password hint in the public interface.
