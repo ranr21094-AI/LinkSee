@@ -135,6 +135,11 @@
 - Desktop and tablet retain a single header row; below 700px the brand and full email remain on the first row while the event name moves to a right-aligned second row.
 - The header and footer contacts read the same `contactEmail` field, so admin edits stay synchronized.
 
+### V16 Hero kicker removal
+
+- Removed the standalone `SOCIAL INNOVATION / 社会创新` kicker while retaining `社会创新` in the editable core-positioning sentence.
+- The project title, positioning underline, page guide, and hover/focus instruction now move upward together from the unchanged Hero copy anchor; portrait placement remains unchanged.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.

@@ -153,15 +153,6 @@ a {
   max-width: 760px;
 }
 
-.hero-project-kicker {
-  margin: 0 0 12px;
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 950;
-  line-height: 1;
-  letter-spacing: 0.13em;
-}
-
 .hero-copy h1 {
   max-width: 770px;
   margin: 0;
@@ -1300,10 +1291,6 @@ a {
 
   .hero {
     padding-top: 38px;
-  }
-
-  .hero-project-kicker {
-    font-size: 10px;
   }
 
   .hero-copy h1 {

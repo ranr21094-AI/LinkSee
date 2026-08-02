@@ -337,7 +337,6 @@ function TeamHome({ team }) {
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="hero-project-kicker">SOCIAL INNOVATION / 社会创新</p>
           <h1 id="hero-title">
             {projectNameLead}
             {projectNameTail && (

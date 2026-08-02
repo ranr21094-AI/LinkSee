@@ -15,6 +15,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Current team mix is four women and one man. The left-middle portrait slot represents 娄午尘 and uses the female figure in `team-portrait-stage-v2.png`.
 - Do not show a large `05` or `MEMBERS` decoration on the public page.
 - Public copy uses `LinkSee`, `灣區AI未來青年創造營`, and `声路·澳门`; do not show `创意引擎` or `AI想象力即“超能力”`. The Hero core-positioning line is `社会创新：「本项目改善的是澳门 城市无障碍游览 场景」`.
+- Do not show the separate `SOCIAL INNOVATION / 社会创新` Hero kicker. The project title, positioning line, page guide, and hover/focus hint begin directly at the established Hero copy anchor and therefore sit higher as one compact group.
 - Show `winnyng0327@gmail.com` as a clickable `mailto:` contact in the footer and keep it editable in `/admin`.
 - Repeat the same editable email as `CONTACT · address` immediately to the right of the public `LinkSee` brand. On desktop and tablet it shares the header row with the event name; below 700px the brand and full email stay on the first row while the event name moves to a second row aligned right.
 - Keep the hero copy vertically compact: desktop starts at `top: 92px` so the positioning underline clears the nearest portrait hair, while tablet and mobile retain their established spacing. On desktop, the hover/focus hint is anchored 16px below the project underline.
