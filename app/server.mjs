@@ -69,9 +69,15 @@ function validateTeam(team) {
     }
   }
 
-  for (const group of ["features", "journey", "highlights"]) {
-    if (!Array.isArray(team.project[group]) || team.project[group].length !== 3) {
-      throw new Error(`项目字段 ${group} 必须保留三项`);
+  const requiredProjectListLengths = {
+    features: 3,
+    journey: 6,
+    highlights: 3,
+  };
+
+  for (const [group, requiredLength] of Object.entries(requiredProjectListLengths)) {
+    if (!Array.isArray(team.project[group]) || team.project[group].length !== requiredLength) {
+      throw new Error(`项目字段 ${group} 必须保留 ${requiredLength} 项`);
     }
 
     team.project[group].forEach((item, index) => {

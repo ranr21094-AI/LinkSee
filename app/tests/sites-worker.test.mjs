@@ -95,10 +95,19 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.equal(source.project.features[1].title, "感官导航");
   assert.equal(source.project.features[2].title, "多结局叙事");
   assert.equal(source.project.features.length, 3);
-  assert.equal(source.project.journey.length, 3);
+  assert.equal(source.project.journey.length, 6);
+  assert.deepEqual(
+    source.project.journey.map((step) => step.title),
+    ["进入网页", "选择关卡", "盲杖探索", "障碍与分支", "抵达终点", "知识与反思"],
+  );
   assert.equal(source.project.highlights.length, 3);
   assert.match(source.project.goals.shortTerm, /72 小时/);
+  assert.match(source.project.goals.shortTerm, /制作并部署团队 \/ 项目介绍页面/);
+  assert.match(source.project.goals.shortTerm, /公益创新方向/);
   assert.match(source.project.goals.longTerm, /无障碍热力图/);
+  assert.match(source.project.audience, /普通社会公众/);
+  assert.match(source.project.audience, /政府相关部门/);
+  assert.match(source.project.audience, /各大学校及社团/);
   assert.match(appSource, /aria-label="页面导览"/);
   assert.ok(
     appSource.indexOf('className="page-guide"') <

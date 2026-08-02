@@ -216,7 +216,7 @@ function ProjectStory({ project }) {
         <div className="journey-block">
           <header>
             <p className="editorial-label">HOW IT WORKS / 使用流程</p>
-            <p>从选择关卡，到抵达终点。</p>
+            <p>从进入网页，到知识卡片与反思引导。</p>
           </header>
           <ol>
             {project.journey.map((step, index) => (
@@ -236,8 +236,8 @@ function ProjectStory({ project }) {
         <div className="content-section challenge-section">
           <SectionHeading
             index="02"
-            eyebrow="WHY IT MATTERS / 现实痛点"
-            title={"从设施断点，\n到公众认知的断点。"}
+            eyebrow="WHY IT MATTERS / 现实痛点分析"
+            title="现实痛点分析"
             inverse
           />
           <div className="pain-grid">
@@ -256,8 +256,8 @@ function ProjectStory({ project }) {
       <section className="content-section innovation-section" id="innovation">
         <SectionHeading
           index="03"
-          eyebrow="WHAT MAKES IT DIFFERENT / 核心亮点"
-          title="把单向宣传变成第一人称体验"
+          eyebrow="WHAT MAKES IT DIFFERENT / 项目核心亮点"
+          title="项目核心亮点"
         />
         <div className="highlight-list">
           {project.highlights.map((highlight, index) => (
@@ -274,18 +274,18 @@ function ProjectStory({ project }) {
         <div className="content-section goals-section">
           <SectionHeading
             index="04"
-            eyebrow="OUR GOALS / 参赛目标"
-          title={"72 小时做出 Demo，\n再让体验走向公共教育。"}
+            eyebrow="OUR GOALS / 参赛目标 & 服务群体"
+            title="参赛目标 & 服务群体"
           />
           <div className="goals-grid">
             <article>
               <p className="editorial-label">NOW / 赛事期间</p>
-              <h3>完成可运行 Demo</h3>
+              <h3>短期目标（赛事期间 72h）</h3>
               <p>{project.goals.shortTerm}</p>
             </article>
             <article>
               <p className="editorial-label">NEXT / 赛事之后</p>
-              <h3>拓展教育与城市参考</h3>
+              <h3>长期愿景（赛事之后）</h3>
               <p>{project.goals.longTerm}</p>
             </article>
           </div>
