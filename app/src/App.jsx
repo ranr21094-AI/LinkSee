@@ -249,7 +249,6 @@ function ProjectStory({ project }) {
               </article>
             ))}
           </div>
-          <p className="research-note">{project.researchNote}</p>
         </div>
       </section>
 
@@ -427,7 +426,6 @@ function TeamHome({ team }) {
           <a href={`mailto:${team.contactEmail}`}>
             CONTACT · {team.contactEmail}
           </a>
-          <a href="/?view=admin">管理内容</a>
         </div>
       </footer>
     </main>

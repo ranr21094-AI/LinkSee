@@ -88,6 +88,8 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.equal("trackTitle" in source, false);
   assert.equal("headline" in source, false);
   assert.doesNotMatch(appSource, /SOCIAL INNOVATION \/ 社会创新/);
+  assert.doesNotMatch(appSource, /className="research-note"/);
+  assert.doesNotMatch(appSource, /href="\/\?view=admin"/);
   assert.match(source.projectLine, /社会创新/);
   assert.equal(source.project.name, "声路·澳门");
   assert.equal(source.project.tagline, "第一人称盲人出行体验游戏");

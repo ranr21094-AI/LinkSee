@@ -750,15 +750,6 @@ a {
   letter-spacing: -0.04em;
 }
 
-.research-note {
-  max-width: 950px;
-  margin: 34px 0 0 auto;
-  color: #b8b2aa;
-  font-size: 12px;
-  font-weight: 650;
-  line-height: 1.8;
-}
-
 .highlight-list {
   margin-top: 80px;
   border-top: 4px solid var(--blue);
@@ -1436,10 +1427,6 @@ a {
 
   .pain-grid article {
     border-color: #4b4946;
-  }
-
-  .research-note {
-    margin-top: 26px;
   }
 
   .highlight-list {
