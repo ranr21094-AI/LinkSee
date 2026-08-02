@@ -124,6 +124,11 @@
 - Corrected the audience-card interpretation: restored its normal bottom inset and the original `76px` following-section gap, then grouped the label and body at the top with a `28px` gap.
 - Applied the same `28px` label-to-body spacing on mobile while retaining the `42px` mobile heading rail.
 
+### V14 hero guide order
+
+- Moved the four-link page guide above the desktop hover/focus instruction without changing either component's styling or behavior.
+- Touch layouts continue to show the guide while hiding the hover-only instruction.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.

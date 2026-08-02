@@ -338,10 +338,6 @@ function TeamHome({ team }) {
             )}
           </h1>
           <p className="project-line">{team.projectLine}</p>
-          <p className="hover-hint">
-            <span>HOVER / FOCUS</span>
-            悬停头像，认识我们
-          </p>
           <nav className="page-guide" aria-label="页面导览">
             {pageGuideItems.map((item) => (
               <a key={item.href} href={item.href}>
@@ -350,6 +346,10 @@ function TeamHome({ team }) {
               </a>
             ))}
           </nav>
+          <p className="hover-hint">
+            <span>HOVER / FOCUS</span>
+            悬停头像，认识我们
+          </p>
         </div>
 
         <div className="portrait-stage">

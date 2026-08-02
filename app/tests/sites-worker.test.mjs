@@ -88,6 +88,10 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.equal(source.project.journey.length, 3);
   assert.equal(source.project.highlights.length, 3);
   assert.match(appSource, /aria-label="页面导览"/);
+  assert.ok(
+    appSource.indexOf('className="page-guide"') <
+      appSource.indexOf('className="hover-hint"'),
+  );
   for (const href of ["#project", "#challenge", "#innovation", "#goals"]) {
     assert.match(appSource, new RegExp(`href: "${href}"`));
   }
