@@ -118,6 +118,12 @@
 - Reduced the audience panel's bottom inset to `22px` and the gap before the feature grid to `52px`, removing the oversized lower whitespace without changing its content.
 - Kept the existing tablet and mobile heading grids and stacked project layout unchanged.
 
+### V13 spacing clarification
+
+- Moved all 01–04 headings farther left by reducing the desktop and tablet number rail to `56px` and the inter-column gap to `12px`.
+- Corrected the audience-card interpretation: restored its normal bottom inset and the original `76px` following-section gap, then grouped the label and body at the top with a `28px` gap.
+- Applied the same `28px` label-to-body spacing on mobile while retaining the `42px` mobile heading rail.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.

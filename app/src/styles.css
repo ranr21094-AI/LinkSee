@@ -499,8 +499,8 @@ a {
 
 .section-heading {
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
   padding-top: 18px;
   border-top: 3px solid var(--ink);
 }
@@ -572,8 +572,7 @@ a {
 .audience-panel {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 22px;
+  justify-content: flex-start;
   border-left: 1px solid var(--line);
   background: var(--blue);
   color: white;
@@ -584,7 +583,7 @@ a {
 }
 
 .audience-panel > p:last-child {
-  margin: 56px 0 0;
+  margin: 28px 0 0;
   font-size: 18px;
   font-weight: 750;
   line-height: 1.7;
@@ -593,7 +592,7 @@ a {
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 52px;
+  margin-top: 76px;
   border-top: 4px solid var(--red);
 }
 
@@ -1168,7 +1167,7 @@ a {
   }
 
   .section-heading {
-    grid-template-columns: 80px minmax(0, 1fr);
+    grid-template-columns: 56px minmax(0, 1fr);
   }
 
   .section-heading h2 {
@@ -1337,7 +1336,7 @@ a {
   }
 
   .audience-panel > p:last-child {
-    margin-top: 40px;
+    margin-top: 28px;
     font-size: 16px;
   }
 
