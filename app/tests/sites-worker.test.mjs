@@ -3,6 +3,30 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 import worker from "../worker/index.js";
 
+function createMemoryD1() {
+  let payload = null;
+
+  return {
+    prepare(sql) {
+      let bindings = [];
+      return {
+        bind(...values) {
+          bindings = values;
+          return this;
+        },
+        async first() {
+          if (sql.startsWith("SELECT")) return payload ? { payload } : null;
+          return null;
+        },
+        async run() {
+          if (sql.startsWith("INSERT")) payload = bindings[1];
+          return { success: true };
+        },
+      };
+    },
+  };
+}
+
 test("serves existing static assets without a fallback", async () => {
   const calls = [];
   const response = await worker.fetch(new Request("https://example.test/assets/app.js"), {
@@ -41,6 +65,80 @@ test("falls back to index.html for an unknown app route", async () => {
   assert.deepEqual(calls, ["/flow/step-two?source=share", "/index.html"]);
 });
 
+test("serves the admin SPA without redirecting the admin path", async () => {
+  const calls = [];
+  const response = await worker.fetch(
+    new Request("https://example.test/admin", { headers: { accept: "text/html" } }),
+    {
+      ASSETS: {
+        fetch: async (request) => {
+          calls.push(new URL(request.url).pathname);
+          return new Response("admin app", { status: 200 });
+        },
+      },
+    },
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), "admin app");
+  assert.deepEqual(calls, ["/index.html"]);
+});
+
+test("verifies the admin password and persists team edits in D1", async () => {
+  const source = JSON.parse(
+    await readFile(new URL("../data/team.json", import.meta.url), "utf8"),
+  );
+  const env = {
+    ADMIN_PASSWORD: "test-secret",
+    DB: createMemoryD1(),
+    ASSETS: {
+      fetch: async (request) =>
+        new URL(request.url).pathname === "/team.json"
+          ? Response.json(source)
+          : new Response("missing", { status: 404 }),
+    },
+  };
+
+  const rejected = await worker.fetch(
+    new Request("https://example.test/api/admin/verify", {
+      method: "POST",
+      headers: { "x-admin-password": "wrong" },
+    }),
+    env,
+  );
+  assert.equal(rejected.status, 401);
+
+  const verified = await worker.fetch(
+    new Request("https://example.test/api/admin/verify", {
+      method: "POST",
+      headers: { "x-admin-password": "test-secret" },
+    }),
+    env,
+  );
+  assert.equal(verified.status, 200);
+
+  const initial = await worker.fetch(new Request("https://example.test/api/team"), env);
+  assert.equal(initial.status, 200);
+  assert.equal((await initial.json()).project.journey[0].title, "进入网页");
+
+  source.project.journey[0].title = "开始体验";
+  const saved = await worker.fetch(
+    new Request("https://example.test/api/team", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        "x-admin-password": "test-secret",
+      },
+      body: JSON.stringify(source),
+    }),
+    env,
+  );
+  assert.equal(saved.status, 200);
+
+  const refreshed = await worker.fetch(new Request("https://example.test/api/team"), env);
+  assert.equal((await refreshed.json()).project.journey[0].title, "开始体验");
+});
+
 test("does not turn missing API or write requests into the app shell", async () => {
   for (const request of [
     new Request("https://example.test/api/missing", { headers: { accept: "application/json" } }),
@@ -65,12 +163,17 @@ test("emits the files required by Sites packaging", async () => {
   await access(new URL("../dist/client/index.html", import.meta.url));
   await access(new URL("../dist/server/index.js", import.meta.url));
   await access(new URL("../dist/.openai/hosting.json", import.meta.url));
+  await access(new URL("../dist/.openai/drizzle/0000_mushy_jackpot.sql", import.meta.url));
   await access(new URL("../dist/client/assets/team-portrait-stage-v2.png", import.meta.url));
   await access(new URL("../dist/client/og.png", import.meta.url));
 });
 
 test("publishes the complete assignment and Sound Road project content", async () => {
   const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  const styles = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+  const hosting = JSON.parse(
+    await readFile(new URL("../.openai/hosting.json", import.meta.url), "utf8"),
+  );
   const source = JSON.parse(
     await readFile(new URL("../data/team.json", import.meta.url), "utf8"),
   );
@@ -90,6 +193,10 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.doesNotMatch(appSource, /SOCIAL INNOVATION \/ 社会创新/);
   assert.doesNotMatch(appSource, /className="research-note"/);
   assert.doesNotMatch(appSource, /href="\/\?view=admin"/);
+  assert.match(appSource, /fetch\("\/api\/admin\/verify"/);
+  assert.match(appSource, /className="journey-editor-grid"/);
+  assert.match(styles, /grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/);
+  assert.equal(hosting.d1, "DB");
   assert.match(source.projectLine, /社会创新/);
   assert.equal(source.project.name, "声路·澳门");
   assert.equal(source.project.tagline, "第一人称盲人出行体验游戏");

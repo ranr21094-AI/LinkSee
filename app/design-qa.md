@@ -144,6 +144,13 @@
 
 - Reworked the 01–04 narrative from `页面补充材料.docx`: the project is now described as a first-person blind-travel experience game, with blind-cane exploration, sensory navigation, multiple endings, documented pain points, three innovation categories, and 72-hour/long-term goals.
 
+### V18 journey editor and hosted persistence
+
+- Replaced the stacked six-step list with a connected horizontal journey route on desktop, a 3 × 2 card route on tablet, and a vertical timeline on mobile.
+- Grouped the six admin step editors into numbered cards so every title and description is visibly editable as one workflow.
+- Added password verification before opening the editor and D1-backed `/api/team` persistence for hosted saves; `/admin` now serves the app shell directly instead of redirecting to the public homepage.
+- Verified the 1440 px route layout, the numbered admin editor cards, the generated D1 migration, build output, worker routes, and persistence tests.
+
 ## Functional and responsive checks
 
 - All five desktop portrait buttons reveal the correct member on hover or keyboard focus and clear the profile on pointer leave or blur.

@@ -46,7 +46,7 @@ async function readRequestBody(request) {
 function validateTeam(team) {
   const requiredTeamFields = ["teamName", "eventName", "contactEmail", "projectLine"];
   const requiredMemberFields = ["id", "name", "role", "age", "gender", "school", "major", "tagline"];
-  const requiredProjectFields = ["name", "tagline", "summary", "audience", "researchNote"];
+  const requiredProjectFields = ["name", "tagline", "summary", "audience"];
 
   if (!team || typeof team !== "object") throw new Error("团队数据格式错误");
   if (!Array.isArray(team.members) || team.members.length !== 5) {
@@ -145,6 +145,15 @@ const server = createHttpServer(async (request, response) => {
   const url = new URL(request.url || "/", `http://${request.headers.host || "localhost"}`);
 
   try {
+    if (url.pathname === "/api/admin/verify" && request.method === "POST") {
+      if (request.headers["x-admin-password"] !== adminPassword) {
+        sendJson(response, 401, { error: "管理密码不正确" });
+        return;
+      }
+      sendJson(response, 200, { ok: true });
+      return;
+    }
+
     if (url.pathname === "/api/team" && request.method === "GET") {
       const team = JSON.parse(await readFile(dataPath, "utf8"));
       sendJson(response, 200, team);

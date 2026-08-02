@@ -27,7 +27,6 @@ const projectFields = [
   ["tagline", "项目口号"],
   ["summary", "产品 / 方案描述", true],
   ["audience", "服务群体", true],
-  ["researchNote", "调研与表达边界", true],
 ];
 
 const painPointFields = [
@@ -52,16 +51,6 @@ const memberFields = [
 ];
 
 async function loadTeam() {
-  const usesLocalApi = ["localhost", "127.0.0.1"].includes(
-    window.location.hostname,
-  );
-
-  if (!usesLocalApi) {
-    const response = await fetch("/team.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("团队资料加载失败");
-    return response.json();
-  }
-
   try {
     const response = await fetch("/api/team", { cache: "no-store" });
     if (!response.ok) throw new Error("API unavailable");
@@ -215,8 +204,11 @@ function ProjectStory({ project }) {
 
         <div className="journey-block">
           <header>
-            <p className="editorial-label">HOW IT WORKS / 使用流程</p>
-            <p>从进入网页，到知识卡片与反思引导。</p>
+            <div>
+              <p className="editorial-label">HOW IT WORKS / 使用流程</p>
+              <p>从进入网页，到知识卡片与反思引导。</p>
+            </div>
+            <span>06 STEPS · ONE JOURNEY</span>
           </header>
           <ol>
             {project.journey.map((step, index) => (
@@ -450,6 +442,8 @@ function AdminPage({ initialTeam }) {
   const [team, setTeam] = useState(initialTeam);
   const [password, setPassword] = useState("");
   const [unlocked, setUnlocked] = useState(false);
+  const [verifying, setVerifying] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -535,6 +529,28 @@ function AdminPage({ initialTeam }) {
     }
   }
 
+  async function verifyPassword(event) {
+    event.preventDefault();
+    if (!password.trim()) return;
+
+    setVerifying(true);
+    setLoginMessage("");
+
+    try {
+      const response = await fetch("/api/admin/verify", {
+        method: "POST",
+        headers: { "x-admin-password": password },
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "密码验证失败");
+      setUnlocked(true);
+    } catch (error) {
+      setLoginMessage(error.message || "密码验证失败");
+    } finally {
+      setVerifying(false);
+    }
+  }
+
   if (!unlocked) {
     return (
       <main className="admin-shell admin-login">
@@ -543,21 +559,18 @@ function AdminPage({ initialTeam }) {
           <p className="admin-eyebrow">CONTENT STUDIO</p>
           <h1>管理后台</h1>
           <p>编辑比赛信息、参赛项目与五位成员资料。队长始终固定在第一位。</p>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (!password.trim()) return;
-              setUnlocked(true);
-            }}
-          >
+          <form onSubmit={verifyPassword}>
             <Field
               label="管理密码"
               type="password"
               value={password}
               onChange={setPassword}
             />
-            <button type="submit" className="primary-button">
-              进入后台
+            <p className="admin-login-message" role="status">
+              {loginMessage}
+            </p>
+            <button type="submit" className="primary-button" disabled={verifying}>
+              {verifying ? "验证中…" : "进入后台"}
             </button>
           </form>
           <a href="/" className="text-link">
@@ -691,25 +704,31 @@ function AdminPage({ initialTeam }) {
 
           <div className="project-editor-group">
             <h3>使用流程</h3>
-            {team.project.journey.map((step, index) => (
-              <div className="admin-grid" key={`journey-${index}`}>
-                <Field
-                  label={`步骤 ${index + 1} 标题`}
-                  value={step.title}
-                  onChange={(value) =>
-                    updateProjectListItem("journey", index, "title", value)
-                  }
-                />
-                <Field
-                  label={`步骤 ${index + 1} 描述`}
-                  value={step.description}
-                  multiline
-                  onChange={(value) =>
-                    updateProjectListItem("journey", index, "description", value)
-                  }
-                />
-              </div>
-            ))}
+            <div className="journey-editor-grid">
+              {team.project.journey.map((step, index) => (
+                <article className="journey-editor-card" key={`journey-${index}`}>
+                  <header>
+                    <span>STEP</span>
+                    <strong>{String(index + 1).padStart(2, "0")}</strong>
+                  </header>
+                  <Field
+                    label={`步骤 ${index + 1} 标题`}
+                    value={step.title}
+                    onChange={(value) =>
+                      updateProjectListItem("journey", index, "title", value)
+                    }
+                  />
+                  <Field
+                    label={`步骤 ${index + 1} 描述`}
+                    value={step.description}
+                    multiline
+                    onChange={(value) =>
+                      updateProjectListItem("journey", index, "description", value)
+                    }
+                  />
+                </article>
+              ))}
+            </div>
           </div>
 
           <div className="project-editor-group">
