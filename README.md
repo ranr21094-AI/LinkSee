@@ -6,7 +6,7 @@ LinkSee 是一支由 5 名成员组成的青年团队，参赛项目为 **《声
 
 - 比赛：灣區AI未來青年創造營
 - 方向：社会创新与城市无障碍游览
-- 在线页面：[linksee-macau-ai-2026.ranr21094.chatgpt.site](https://linksee-macau-ai-2026.ranr21094.chatgpt.site/)
+- 在线页面：[https://ranr21094-ai.github.io/LinkSee/](https://ranr21094-ai.github.io/LinkSee/)
 - 联系方式：[winnyng0327@gmail.com](mailto:winnyng0327@gmail.com)
 
 ## 项目核心功能
