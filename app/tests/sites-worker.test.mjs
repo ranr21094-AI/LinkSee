@@ -217,6 +217,9 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.match(appSource, /appUrl\("assets\/team-portrait-stage-v2\.png"\)/);
   assert.match(appSource, /className="journey-editor-grid"/);
   assert.match(styles, /grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(appSource, /className="section-number"/);
+  assert.doesNotMatch(styles, /\.section-number/);
+  assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.event-lockup \{[\s\S]*?justify-items: start;/);
   assert.equal(hosting.d1, "DB");
   assert.match(source.projectLine, /社会创新/);
   assert.equal(source.project.name, "声路·澳门");

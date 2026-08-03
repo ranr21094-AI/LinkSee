@@ -162,10 +162,9 @@ function StoryTimeline() {
   );
 }
 
-function SectionHeading({ index, eyebrow, title, description, inverse = false }) {
+function SectionHeading({ eyebrow, title, description, inverse = false }) {
   return (
     <header className={`section-heading${inverse ? " section-heading--inverse" : ""}`}>
-      <p className="section-number">{index}</p>
       <div>
         <p className="section-eyebrow">{eyebrow}</p>
         <h2>{title}</h2>
@@ -186,7 +185,6 @@ function ProjectStory({ project }) {
     <div className="editorial-content">
       <section className="content-section project-section" id="project">
         <SectionHeading
-          index="01"
           eyebrow="THE PROJECT / 参赛项目"
           title={project.name}
           description={project.tagline}
@@ -238,7 +236,6 @@ function ProjectStory({ project }) {
       <section className="challenge-band" id="challenge">
         <div className="content-section challenge-section">
           <SectionHeading
-            index="02"
             eyebrow="WHY IT MATTERS / 现实痛点分析"
             title="现实痛点分析"
             inverse
@@ -257,7 +254,6 @@ function ProjectStory({ project }) {
 
       <section className="content-section innovation-section" id="innovation">
         <SectionHeading
-          index="03"
           eyebrow="WHAT MAKES IT DIFFERENT / 项目核心亮点"
           title="项目核心亮点"
         />
@@ -275,7 +271,6 @@ function ProjectStory({ project }) {
       <section className="goals-band" id="goals">
         <div className="content-section goals-section">
           <SectionHeading
-            index="04"
             eyebrow="OUR GOALS / 参赛目标 & 服务群体"
             title="参赛目标 & 服务群体"
           />

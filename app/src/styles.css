@@ -521,20 +521,8 @@ a {
 }
 
 .section-heading {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 12px;
   padding-top: 18px;
   border-top: 3px solid var(--ink);
-}
-
-.section-number {
-  margin: 0;
-  color: var(--red);
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
 }
 
 .section-eyebrow,
@@ -754,10 +742,6 @@ a {
 
 .section-heading--inverse {
   border-color: var(--paper);
-}
-
-.section-heading--inverse .section-number {
-  color: #ff4b3e;
 }
 
 .section-heading--inverse .section-eyebrow {
@@ -1273,10 +1257,6 @@ a {
     padding: 82px 0;
   }
 
-  .section-heading {
-    grid-template-columns: 56px minmax(0, 1fr);
-  }
-
   .section-heading h2 {
     font-size: clamp(48px, 8vw, 72px);
   }
@@ -1372,11 +1352,12 @@ a {
     margin: 0;
     font-size: 11px;
     line-height: 1.35;
+    text-align: left;
   }
 
   .event-lockup {
     width: 100%;
-    justify-items: end;
+    justify-items: start;
   }
 
   .macau-map-watermark {
@@ -1435,8 +1416,6 @@ a {
   }
 
   .section-heading {
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 12px;
     padding-top: 12px;
   }
 

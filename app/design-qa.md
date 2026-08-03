@@ -1,5 +1,10 @@
 # LinkSee Design QA
 
+## V19 — Heading alignment and mobile event lockup
+
+- Removed the decorative `01–04` rails from the four main section headings and aligned each eyebrow, title, and description directly to the shared left content edge.
+- On screens below `700px`, moved `灣區AI未來青年創造營` to the second header row beneath LinkSee and aligned it left.
+
 ## Visual truth and capture conditions
 
 - Source visual: `C:\Users\10127\.codex\generated_images\019fb342-bc4f-7b81-bd34-82b6e5bf015c\call_xEbOPSW1aZgTguu065sGtT9w.png`
