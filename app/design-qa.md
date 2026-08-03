@@ -1,5 +1,11 @@
 # LinkSee Design QA
 
+## V21 — Touch overview and compact feature cards
+
+- The fourth content heading is now `四、参赛目标` at every breakpoint.
+- Touch layouts open on an unnumbered LinkSee overview card with the composite portrait at full brightness; member selection alone activates the matching soft spotlight.
+- At 700px and below, each core-feature number shares a row with its title and the feature cards use tighter vertical spacing.
+
 ## V20 — Chinese section ordinals and touch portrait spotlight
 
 - Added inline Chinese ordinals to the four content headings while keeping the Hero title and stored project name unchanged.

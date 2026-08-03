@@ -122,6 +122,47 @@ function MemberProfile({ member, index, compact = false }) {
   );
 }
 
+function TeamProfile({ team }) {
+  return (
+    <section
+      className="member-profile member-profile--compact team-profile"
+      aria-live="polite"
+    >
+      <header className="profile-heading">
+        <div>
+          <p>TEAM OVERVIEW / 团队概览</p>
+          <h2>{team.teamName}</h2>
+        </div>
+      </header>
+
+      <dl className="profile-facts team-profile-facts">
+        <div>
+          <dt>项目</dt>
+          <dd>{team.project.name}</dd>
+        </div>
+        <div>
+          <dt>类型</dt>
+          <dd>{team.project.tagline}</dd>
+        </div>
+        <div>
+          <dt>定位</dt>
+          <dd>{team.projectLine}</dd>
+        </div>
+        <div>
+          <dt>赛事</dt>
+          <dd>{team.eventName}</dd>
+        </div>
+        <div>
+          <dt>联系</dt>
+          <dd>
+            <a href={`mailto:${team.contactEmail}`}>{team.contactEmail}</a>
+          </dd>
+        </div>
+      </dl>
+    </section>
+  );
+}
+
 function StoryTimeline() {
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -275,8 +316,8 @@ function ProjectStory({ project }) {
         <div className="content-section goals-section">
           <SectionHeading
             ordinal="四"
-            eyebrow="OUR GOALS / 参赛目标 & 服务群体"
-            title="参赛目标 & 服务群体"
+            eyebrow="OUR GOALS / 参赛目标"
+            title="参赛目标"
           />
           <div className="goals-grid">
             <article>
@@ -297,11 +338,10 @@ function ProjectStory({ project }) {
 }
 
 function TeamHome({ team }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(null);
   const [desktopActiveIndex, setDesktopActiveIndex] = useState(null);
-  const activeMember = team.members[activeIndex] || team.members[0];
-  const activeSlot =
-    portraitSlots[activeIndex] || portraitSlots[portraitSlots.length - 1];
+  const activeMember = activeIndex === null ? null : team.members[activeIndex];
+  const activeSlot = activeIndex === null ? null : portraitSlots[activeIndex];
   const desktopActiveMember =
     desktopActiveIndex === null ? null : team.members[desktopActiveIndex];
   const desktopActiveSlot =
@@ -371,13 +411,15 @@ function TeamHome({ team }) {
             className="team-portrait"
           />
 
-          <div
-            className={`mobile-portrait-focus mobile-portrait-focus--${activeSlot.key}`}
-            aria-hidden="true"
-          >
-            <span className="mobile-portrait-dimmer" />
-            <span className="mobile-portrait-halo" />
-          </div>
+          {activeSlot ? (
+            <div
+              className={`mobile-portrait-focus mobile-portrait-focus--${activeSlot.key}`}
+              aria-hidden="true"
+            >
+              <span className="mobile-portrait-dimmer" />
+              <span className="mobile-portrait-halo" />
+            </div>
+          ) : null}
 
           <div className="portrait-hotspots" aria-label="选择团队成员">
             {team.members.map((member, index) => {
@@ -411,7 +453,15 @@ function TeamHome({ team }) {
           <StoryTimeline />
         </div>
 
-        <div className="mobile-member-nav" aria-label="选择团队成员">
+        <div className="mobile-member-nav" aria-label="选择团队或成员资料">
+          <button
+            type="button"
+            className={activeIndex === null ? "is-active" : ""}
+            aria-pressed={activeIndex === null}
+            onClick={() => setActiveIndex(null)}
+          >
+            LinkSee
+          </button>
           {team.members.map((member, index) => (
             <button
               type="button"
@@ -427,7 +477,11 @@ function TeamHome({ team }) {
         </div>
 
         <div className="mobile-profile">
-          <MemberProfile member={activeMember} index={activeIndex} compact />
+          {activeMember ? (
+            <MemberProfile member={activeMember} index={activeIndex} compact />
+          ) : (
+            <TeamProfile team={team} />
+          )}
         </div>
       </section>
 

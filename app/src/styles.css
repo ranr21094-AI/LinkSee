@@ -1339,6 +1339,17 @@ a {
     backdrop-filter: none;
   }
 
+  .team-profile-facts {
+    margin-bottom: 0;
+  }
+
+  .team-profile a {
+    color: var(--blue);
+    overflow-wrap: anywhere;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
   .site-footer {
     width: calc(100% - 40px);
   }
@@ -1577,6 +1588,27 @@ a {
   .pain-grid h3,
   .goals-grid h3 {
     margin: 34px 0 12px;
+  }
+
+  .feature-grid article {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    column-gap: 12px;
+    row-gap: 12px;
+    padding: 18px 0 22px;
+  }
+
+  .feature-grid article > span {
+    padding-top: 0.45em;
+  }
+
+  .feature-grid h3 {
+    margin: 0;
+  }
+
+  .feature-grid article > p {
+    grid-column: 1 / -1;
   }
 
   .journey-block {

@@ -206,7 +206,7 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.match(appSource, /className="header-contact"/);
   assert.equal(
     appSource.match(/mailto:\$\{team\.contactEmail\}/g)?.length,
-    2,
+    3,
   );
   assert.equal("trackTitle" in source, false);
   assert.equal("headline" in source, false);
@@ -223,6 +223,12 @@ test("publishes the complete assignment and Sound Road project content", async (
     assert.match(appSource, new RegExp(`ordinal="${ordinal}"`));
   }
   assert.match(appSource, /<h2>\{ordinal\}、\{title\}<\/h2>/);
+  assert.match(appSource, /eyebrow="OUR GOALS \/ 参赛目标"/);
+  assert.doesNotMatch(appSource, /OUR GOALS \/ 参赛目标 & 服务群体/);
+  assert.match(appSource, /const \[activeIndex, setActiveIndex\] = useState\(null\)/);
+  assert.match(appSource, />\s*LinkSee\s*<\/button>/);
+  assert.match(appSource, /<TeamProfile team=\{team\} \/>/);
+  assert.match(appSource, /aria-pressed=\{activeIndex === null\}/);
   assert.match(appSource, /className=\{`mobile-portrait-focus mobile-portrait-focus--\$\{activeSlot\.key\}`\}/);
   assert.match(appSource, /aria-pressed=\{activeIndex === index\}/);
   for (const slot of ["captain", "developer", "director", "designer", "engineer"]) {
@@ -230,6 +236,8 @@ test("publishes the complete assignment and Sound Road project content", async (
   }
   assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.event-lockup \{[\s\S]*?display: none;/);
   assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.hero \{[\s\S]*?padding-top: 18px;/);
+  assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.feature-grid article \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\);/);
+  assert.match(styles, /\.feature-grid article > p \{\s*grid-column: 1 \/ -1;/);
   assert.equal(hosting.d1, "DB");
   assert.match(source.projectLine, /社会创新/);
   assert.equal(source.project.name, "声路·澳门");
