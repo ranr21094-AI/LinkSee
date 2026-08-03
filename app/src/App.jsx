@@ -162,12 +162,12 @@ function StoryTimeline() {
   );
 }
 
-function SectionHeading({ eyebrow, title, description, inverse = false }) {
+function SectionHeading({ ordinal, eyebrow, title, description, inverse = false }) {
   return (
     <header className={`section-heading${inverse ? " section-heading--inverse" : ""}`}>
       <div>
         <p className="section-eyebrow">{eyebrow}</p>
-        <h2>{title}</h2>
+        <h2>{ordinal}、{title}</h2>
         {description && <p className="section-description">{description}</p>}
       </div>
     </header>
@@ -185,6 +185,7 @@ function ProjectStory({ project }) {
     <div className="editorial-content">
       <section className="content-section project-section" id="project">
         <SectionHeading
+          ordinal="一"
           eyebrow="THE PROJECT / 参赛项目"
           title={project.name}
           description={project.tagline}
@@ -236,6 +237,7 @@ function ProjectStory({ project }) {
       <section className="challenge-band" id="challenge">
         <div className="content-section challenge-section">
           <SectionHeading
+            ordinal="二"
             eyebrow="WHY IT MATTERS / 现实痛点分析"
             title="现实痛点分析"
             inverse
@@ -254,6 +256,7 @@ function ProjectStory({ project }) {
 
       <section className="content-section innovation-section" id="innovation">
         <SectionHeading
+          ordinal="三"
           eyebrow="WHAT MAKES IT DIFFERENT / 项目核心亮点"
           title="项目核心亮点"
         />
@@ -271,6 +274,7 @@ function ProjectStory({ project }) {
       <section className="goals-band" id="goals">
         <div className="content-section goals-section">
           <SectionHeading
+            ordinal="四"
             eyebrow="OUR GOALS / 参赛目标 & 服务群体"
             title="参赛目标 & 服务群体"
           />
@@ -296,6 +300,8 @@ function TeamHome({ team }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [desktopActiveIndex, setDesktopActiveIndex] = useState(null);
   const activeMember = team.members[activeIndex] || team.members[0];
+  const activeSlot =
+    portraitSlots[activeIndex] || portraitSlots[portraitSlots.length - 1];
   const desktopActiveMember =
     desktopActiveIndex === null ? null : team.members[desktopActiveIndex];
   const desktopActiveSlot =
@@ -365,6 +371,14 @@ function TeamHome({ team }) {
             className="team-portrait"
           />
 
+          <div
+            className={`mobile-portrait-focus mobile-portrait-focus--${activeSlot.key}`}
+            aria-hidden="true"
+          >
+            <span className="mobile-portrait-dimmer" />
+            <span className="mobile-portrait-halo" />
+          </div>
+
           <div className="portrait-hotspots" aria-label="选择团队成员">
             {team.members.map((member, index) => {
               const slot = portraitSlots[index] || portraitSlots[portraitSlots.length - 1];
@@ -403,6 +417,7 @@ function TeamHome({ team }) {
               type="button"
               key={member.id}
               className={activeIndex === index ? "is-active" : ""}
+              aria-pressed={activeIndex === index}
               onClick={() => setActiveIndex(index)}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>

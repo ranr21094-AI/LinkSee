@@ -504,7 +504,8 @@ a {
 }
 
 .mobile-member-nav,
-.mobile-profile {
+.mobile-profile,
+.mobile-portrait-focus {
   display: none;
 }
 
@@ -1191,6 +1192,96 @@ a {
     display: none;
   }
 
+  .mobile-portrait-focus {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-portrait-dimmer {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 15, 31, 0.34);
+  }
+
+  .mobile-portrait-halo {
+    position: absolute;
+    border: 1px solid rgba(20, 93, 255, 0.28);
+    border-radius: 50%;
+    box-shadow:
+      0 0 18px rgba(20, 93, 255, 0.2),
+      inset 0 0 22px rgba(255, 250, 244, 0.18);
+    transform: translate(-50%, -50%);
+    transition:
+      left 220ms ease,
+      top 220ms ease,
+      width 220ms ease,
+      height 220ms ease;
+  }
+
+  .mobile-portrait-focus--captain .mobile-portrait-dimmer {
+    -webkit-mask-image: radial-gradient(ellipse 18% 35% at 50% 68%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+    mask-image: radial-gradient(ellipse 18% 35% at 50% 68%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+  }
+
+  .mobile-portrait-focus--captain .mobile-portrait-halo {
+    left: 50%;
+    top: 68%;
+    width: 36%;
+    height: 70%;
+  }
+
+  .mobile-portrait-focus--developer .mobile-portrait-dimmer {
+    -webkit-mask-image: radial-gradient(ellipse 10% 23% at 37% 53%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+    mask-image: radial-gradient(ellipse 10% 23% at 37% 53%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+  }
+
+  .mobile-portrait-focus--developer .mobile-portrait-halo {
+    left: 37%;
+    top: 53%;
+    width: 20%;
+    height: 46%;
+  }
+
+  .mobile-portrait-focus--director .mobile-portrait-dimmer {
+    -webkit-mask-image: radial-gradient(ellipse 13% 29% at 63% 46%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+    mask-image: radial-gradient(ellipse 13% 29% at 63% 46%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+  }
+
+  .mobile-portrait-focus--director .mobile-portrait-halo {
+    left: 63%;
+    top: 46%;
+    width: 26%;
+    height: 58%;
+  }
+
+  .mobile-portrait-focus--designer .mobile-portrait-dimmer {
+    -webkit-mask-image: radial-gradient(ellipse 14% 29% at 24% 73%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+    mask-image: radial-gradient(ellipse 14% 29% at 24% 73%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+  }
+
+  .mobile-portrait-focus--designer .mobile-portrait-halo {
+    left: 24%;
+    top: 73%;
+    width: 28%;
+    height: 58%;
+  }
+
+  .mobile-portrait-focus--engineer .mobile-portrait-dimmer {
+    -webkit-mask-image: radial-gradient(ellipse 16% 34% at 81% 68%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+    mask-image: radial-gradient(ellipse 16% 34% at 81% 68%, transparent 0 62%, rgba(0, 0, 0, 0.35) 79%, #000 100%);
+  }
+
+  .mobile-portrait-focus--engineer .mobile-portrait-halo {
+    left: 81%;
+    top: 68%;
+    width: 32%;
+    height: 68%;
+  }
+
   .page-guide {
     width: 100%;
     overflow-x: auto;
@@ -1356,8 +1447,7 @@ a {
   }
 
   .event-lockup {
-    width: 100%;
-    justify-items: start;
+    display: none;
   }
 
   .macau-map-watermark {
@@ -1365,7 +1455,7 @@ a {
   }
 
   .hero {
-    padding-top: 38px;
+    padding-top: 18px;
   }
 
   .hero-copy h1 {

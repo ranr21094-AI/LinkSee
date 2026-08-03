@@ -219,7 +219,17 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.match(styles, /grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/);
   assert.doesNotMatch(appSource, /className="section-number"/);
   assert.doesNotMatch(styles, /\.section-number/);
-  assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.event-lockup \{[\s\S]*?justify-items: start;/);
+  for (const ordinal of ["一", "二", "三", "四"]) {
+    assert.match(appSource, new RegExp(`ordinal="${ordinal}"`));
+  }
+  assert.match(appSource, /<h2>\{ordinal\}、\{title\}<\/h2>/);
+  assert.match(appSource, /className=\{`mobile-portrait-focus mobile-portrait-focus--\$\{activeSlot\.key\}`\}/);
+  assert.match(appSource, /aria-pressed=\{activeIndex === index\}/);
+  for (const slot of ["captain", "developer", "director", "designer", "engineer"]) {
+    assert.match(styles, new RegExp(`mobile-portrait-focus--${slot}`));
+  }
+  assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.event-lockup \{[\s\S]*?display: none;/);
+  assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.hero \{[\s\S]*?padding-top: 18px;/);
   assert.equal(hosting.d1, "DB");
   assert.match(source.projectLine, /社会创新/);
   assert.equal(source.project.name, "声路·澳门");

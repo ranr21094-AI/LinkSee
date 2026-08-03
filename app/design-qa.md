@@ -1,5 +1,10 @@
 # LinkSee Design QA
 
+## V20 — Chinese section ordinals and touch portrait spotlight
+
+- Added inline Chinese ordinals to the four content headings while keeping the Hero title and stored project name unchanged.
+- Removed the event lockup below `700px`, reduced the mobile Hero top padding to `18px`, and added five synchronized spotlight positions for the existing mobile/tablet member buttons.
+
 ## V19 — Heading alignment and mobile event lockup
 
 - Removed the decorative `01–04` rails from the four main section headings and aligned each eyebrow, title, and description directly to the shared left content edge.
