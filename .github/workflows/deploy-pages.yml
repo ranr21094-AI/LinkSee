@@ -61,3 +61,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # GitHub Pages 后端偶发让部署长时间停留在 queued 状态（GitHub 侧已知问题）。
+          # 默认 10 分钟超时会把短暂队列积压误报为失败，放宽到 30 分钟以扛过积压。
+          timeout: 1800000
