@@ -1,0 +1,12 @@
+# 本仓库只托管网页项目（LinkSee 团队介绍页 / 声路·澳门）
+# 以下目录属于本地工作与游戏项目，不纳入版本控制
+
+node_modules/
+dist/
+qa/
+.tmp/
+tmp/
+game/
+web-game/
+web-game-2d/
+deliverables/
