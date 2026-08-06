@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 const appBase = import.meta.env.BASE_URL || "/";
 const apiOrigin = (import.meta.env.VITE_API_ORIGIN || "").replace(/\/$/, "");
 
+const GAME_URL = "https://ranr21094-ai.github.io/Game-2D-LinkSee/";
+
 function appUrl(path = "") {
   return `${appBase}${path.replace(/^\//, "")}`;
 }
@@ -380,15 +382,26 @@ function TeamHome({ team }) {
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <h1 id="hero-title">
-            {projectNameLead}
-            {projectNameTail && (
-              <>
-                <span className="project-name-dot">·</span>
-                {projectNameTail}
-              </>
-            )}
-          </h1>
+          <div className="hero-title-row">
+            <h1 id="hero-title">
+              {projectNameLead}
+              {projectNameTail && (
+                <>
+                  <span className="project-name-dot">·</span>
+                  {projectNameTail}
+                </>
+              )}
+            </h1>
+            <a
+              className="play-game-button"
+              href={GAME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="进入 2D 游戏 LinkSee"
+            >
+              <span aria-hidden="true">▶</span> 进入游戏
+            </a>
+          </div>
           <p className="project-line">{team.projectLine}</p>
           <nav className="page-guide" aria-label="页面导览">
             {pageGuideItems.map((item) => (

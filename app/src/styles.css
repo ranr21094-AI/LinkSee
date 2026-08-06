@@ -168,6 +168,41 @@ a {
   color: var(--red);
 }
 
+.hero-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+
+.play-game-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  margin-top: 6px;
+  padding: 10px 22px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--paper-strong);
+  font: inherit;
+  font-weight: 900;
+  font-size: clamp(14px, 1.2vw, 17px);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.play-game-button:hover,
+.play-game-button:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--ink);
+  outline: none;
+}
+
 .project-line {
   display: inline-block;
   margin: 30px 0 0;
