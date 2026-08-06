@@ -119,7 +119,7 @@ test("verifies the admin password and persists team edits in D1", async () => {
 
   const initial = await worker.fetch(new Request("https://example.test/api/team"), env);
   assert.equal(initial.status, 200);
-  assert.equal((await initial.json()).project.journey[0].title, "进入网页");
+  assert.equal((await initial.json()).project.journey[0].title, "主菜单选模式");
 
   source.project.journey[0].title = "开始体验";
   const saved = await worker.fetch(
@@ -241,7 +241,7 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.equal(hosting.d1, "DB");
   assert.match(source.projectLine, /社会创新/);
   assert.equal(source.project.name, "声路·澳门");
-  assert.equal(source.project.tagline, "第一人称盲人出行体验游戏");
+  assert.equal(source.project.tagline, "以澳门为舞台的 2D 像素叙事游戏");
   assert.equal(source.project.features[0].title, "盲杖探索");
   assert.equal(source.project.features[1].title, "感官导航");
   assert.equal(source.project.features[2].title, "多结局叙事");
@@ -249,16 +249,16 @@ test("publishes the complete assignment and Sound Road project content", async (
   assert.equal(source.project.journey.length, 6);
   assert.deepEqual(
     source.project.journey.map((step) => step.title),
-    ["进入网页", "选择关卡", "盲杖探索", "障碍与分支", "抵达终点", "知识与反思"],
+    ["主菜单选模式", "开场 · 一条语音", "拱北口岸 · 關閘", "17 路车厢", "白鸽巢旧城", "大三巴重逢"],
   );
   assert.equal(source.project.highlights.length, 3);
   assert.match(source.project.goals.shortTerm, /72 小时/);
   assert.match(source.project.goals.shortTerm, /制作并部署团队 \/ 项目介绍页面/);
   assert.match(source.project.goals.shortTerm, /公益创新方向/);
-  assert.match(source.project.goals.longTerm, /无障碍热力图/);
-  assert.match(source.project.audience, /普通社会公众/);
+  assert.match(source.project.goals.longTerm, /澳门 LBS/);
+  assert.match(source.project.audience, /低视力 \/ 视障玩家/);
   assert.match(source.project.audience, /政府相关部门/);
-  assert.match(source.project.audience, /各大学校及社团/);
+  assert.match(source.project.audience, /公益组织/);
   assert.match(appSource, /aria-label="页面导览"/);
   assert.ok(
     appSource.indexOf('className="page-guide"') <
