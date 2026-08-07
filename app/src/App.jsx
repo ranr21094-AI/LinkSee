@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useChineseLocale } from "./chinese-locale";
 
 const appBase = import.meta.env.BASE_URL || "/";
 const apiOrigin = (import.meta.env.VITE_API_ORIGIN || "").replace(/\/$/, "");
@@ -353,6 +354,7 @@ function TeamHome({ team }) {
         portraitSlots[portraitSlots.length - 1];
   const [projectNameLead, ...projectNameTailParts] = team.project.name.split("·");
   const projectNameTail = projectNameTailParts.join("·");
+  const { locale, setLocale } = useChineseLocale();
 
   return (
     <main className="site-shell">
@@ -367,6 +369,29 @@ function TeamHome({ team }) {
             <span>CONTACT ·</span>
             {team.contactEmail}
           </a>
+          <div
+            className="locale-toggle"
+            role="group"
+            aria-label="切换简繁体"
+            data-no-convert
+          >
+            <button
+              type="button"
+              className="locale-segment"
+              aria-pressed={locale === "sc"}
+              onClick={() => setLocale("sc")}
+            >
+              简体
+            </button>
+            <button
+              type="button"
+              className="locale-segment"
+              aria-pressed={locale === "tc"}
+              onClick={() => setLocale("tc")}
+            >
+              繁體
+            </button>
+          </div>
         </div>
         <div className="event-lockup">
           <p className="event-name">{team.eventName}</p>
